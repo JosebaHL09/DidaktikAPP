@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 declare var google;
+
 @Component({
   selector: 'app-game',
   templateUrl: './game.page.html',
@@ -9,13 +12,34 @@ export class GamePage implements OnInit {
 
   map = null;
 
-  constructor() { }
+  lati;
+  long;
+
+  constructor(private geolocation: Geolocation) { }
 
   ngOnInit() {
     this.loadMap();
   }
 
+
+
   loadMap() {
+
+    this.geolocation.getCurrentPosition({
+      timeout: 10000,
+      enableHighAccuracy: true
+    }).then((resp) => {
+      this.lati = resp.coords.latitude
+      this.long = resp.coords.longitude
+      console.log(this.lati)
+      console.log(this.long)
+
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
+
+
     let style = [
       {
         "featureType": "administrative",
@@ -55,8 +79,8 @@ export class GamePage implements OnInit {
     // create a new map by passing HTMLElement
     const mapEle: HTMLElement = document.getElementById('map');
     // create LatLng object
-    
-    const myLatLng = { lat: 43.1677686, lng: -2.6411662 };
+
+    const myLatLng = { lat: this.lati, lng: Number(this.long) };
     // create map
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,

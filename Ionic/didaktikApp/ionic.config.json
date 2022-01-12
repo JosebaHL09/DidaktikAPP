@@ -1,5 +1,7 @@
 {
   "name": "didaktikApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

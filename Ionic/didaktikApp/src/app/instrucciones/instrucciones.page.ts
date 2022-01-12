@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 @Component({
   selector: 'app-instrucciones',
   templateUrl: './instrucciones.page.html',
@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstruccionesPage implements OnInit {
 
-  constructor() { }
+  lat;
+  long;
+
+  constructor(private geolocation: Geolocation) { }
 
   ngOnInit() {
+  }
+
+  getPosition() {
+    this.geolocation.getCurrentPosition({
+      timeout: 10000,
+      enableHighAccuracy: true
+    }).then((resp) => {
+      this.lat = resp.coords.latitude
+      this.long = resp.coords.longitude
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
   }
 
 }
