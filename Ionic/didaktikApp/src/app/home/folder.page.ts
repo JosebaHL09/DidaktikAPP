@@ -24,11 +24,13 @@ export class FolderPage implements OnInit {
     });
     await alert.present();
   }
+  
 
   goInstrucciones() {
     this.route.navigate(['/instrucciones']);
   }
   goJuego() {
+    
     this.route.navigate(['/game']);
   }
 
