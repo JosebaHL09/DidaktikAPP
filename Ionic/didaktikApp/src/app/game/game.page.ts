@@ -33,6 +33,34 @@ export class GamePage implements OnInit {
 
       title: 'Estatua de la sardinera'
     },
+    {
+     
+      lati: 43.331710,
+      long: -3.034654,
+   
+    title: 'Calle Itsasalde'
+  },
+  {
+     
+    lati: 43.330703,
+    long: -3.031600,
+ 
+    title: 'Club de remo la Sotera'
+  },
+  {
+     
+    lati: 43.330703,
+    long: -3.031600,
+
+    title: 'Puerto de Santurtzi'
+  },
+  {
+     
+    lati: 43.328831,
+    long: -3.032961,
+
+    title: 'Ayuntamiento de Santurtzi'
+  },
   ];
   lati;
   long;
