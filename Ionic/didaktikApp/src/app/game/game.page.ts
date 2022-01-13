@@ -12,6 +12,29 @@ export class GamePage implements OnInit {
 
   map = null;
 
+  markers: any = [
+    {
+     
+        lati: 43.334481,
+        long: -3.062792,
+     
+      title: 'Primer castillo del monte Serantes'
+    },
+    {
+     
+        lati: 43.332622,
+        long: -3.040442,
+      
+      title: 'Mural Eskorbuto'
+    },
+    {
+      
+        lati: 43.334328,
+        long: -3.039364,
+      
+      title: 'Estatua de la sardinera'
+    },
+  ];
   lati;
   long;
 
@@ -97,6 +120,7 @@ export class GamePage implements OnInit {
           strokeColor: '#ffffff',
         }
       });
+      this.addMarker(this.markers);
       marker.setMap(this.map);
       var circle = new google.maps.Circle({
         center: marker.getPosition(),
@@ -120,4 +144,19 @@ export class GamePage implements OnInit {
 
   }
 
+  addMarker(markers) {
+    for (let marker of markers){
+      let position = new google.maps.LatLng(marker.lati, marker.long);
+      let mapMarker = new google.maps.Marker({
+        position: position,
+        title: marker.title,
+        latitude: marker.lati,
+        longitude: marker.long
+      });
+
+      mapMarker.setMap(this.map);
+      //this.addInfoWindowToMarker(mapMarker);
+    }
+    
+  }
 }
