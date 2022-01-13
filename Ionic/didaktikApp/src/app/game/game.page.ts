@@ -64,29 +64,28 @@ export class GamePage implements OnInit {
           ]
         }
       ]
-      // create a new map by passing HTMLElement
+      // meter el mapa en el div que tenemos
       const mapEle: HTMLElement = document.getElementById('map');
-      // create LatLng object
+      // poner las coordenadas
       const myLatLng = new google.maps.LatLng(this.lati, this.long);
-      
-      // create map
+
+      // crear el mapa
       this.map = new google.maps.Map(mapEle, {
         center: myLatLng,
         zoom: 16,
         styles: style,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         streetViewControl: false,
-        disableDefaultUI: true
-
+        disableDefaultUI: true,
+        minZoom:3
       });
-
-
-
+      //cargar el mapa
       google.maps.event.addListenerOnce(this.map, 'idle', () => {
         mapEle.classList.add('show-map');
 
       });
 
+      //marcador de posicion del usuario
       var marker = new google.maps.Marker({
         position: myLatLng,
         icon: {
@@ -98,24 +97,26 @@ export class GamePage implements OnInit {
           strokeColor: '#ffffff',
         }
       });
-      var circle = new google.maps.Circle({
-        center:marker.getPosition(), 
-        radius: 100, 
-        fillColor: "#0000FF", 
-        fillOpacity: 0.1, 
-        map: this.map,
-        strokeColor: "#FFFFFF", 
-        strokeOpacity: 0.1, 
-        strokeWeight: 2 
-        });
-
       marker.setMap(this.map);
-      //circle.setMap(this.map);
+      var circle = new google.maps.Circle({
+        center: marker.getPosition(),
+        radius: 100,
+        fillColor: "#0000FF",
+        fillOpacity: 0.1,
+        map: this.map,
+        strokeColor: "#FFFFFF",
+        strokeOpacity: 0.1,
+        strokeWeight: 2
+      });
+
+
+
+     
 
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-    
+
 
   }
 
