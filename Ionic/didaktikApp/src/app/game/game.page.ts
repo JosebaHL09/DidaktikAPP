@@ -11,27 +11,26 @@ declare var google;
 export class GamePage implements OnInit {
 
   map = null;
-
   markers: any = [
     {
-     
-        lati: 43.334481,
-        long: -3.062792,
-     
+
+      lati: 43.334481,
+      long: -3.062792,
+
       title: 'Primer castillo del monte Serantes'
     },
     {
-     
-        lati: 43.332622,
-        long: -3.040442,
-      
+
+      lati: 43.332622,
+      long: -3.040442,
+
       title: 'Mural Eskorbuto'
     },
     {
-      
-        lati: 43.334328,
-        long: -3.039364,
-      
+
+      lati: 43.334328,
+      long: -3.039364,
+
       title: 'Estatua de la sardinera'
     },
   ];
@@ -87,6 +86,7 @@ export class GamePage implements OnInit {
           ]
         }
       ]
+
       // meter el mapa en el div que tenemos
       const mapEle: HTMLElement = document.getElementById('map');
       // poner las coordenadas
@@ -100,7 +100,7 @@ export class GamePage implements OnInit {
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         streetViewControl: false,
         disableDefaultUI: true,
-        minZoom:3
+        minZoom: 3
       });
       //cargar el mapa
       google.maps.event.addListenerOnce(this.map, 'idle', () => {
@@ -120,8 +120,8 @@ export class GamePage implements OnInit {
           strokeColor: '#ffffff',
         }
       });
-      this.addMarker(this.markers);
       marker.setMap(this.map);
+      this.addMarker(this.markers);
       var circle = new google.maps.Circle({
         center: marker.getPosition(),
         radius: 100,
@@ -135,7 +135,6 @@ export class GamePage implements OnInit {
 
 
 
-     
 
     }).catch((error) => {
       console.log('Error getting location', error);
@@ -143,9 +142,8 @@ export class GamePage implements OnInit {
 
 
   }
-
   addMarker(markers) {
-    for (let marker of markers){
+    for (let marker of markers) {
       let position = new google.maps.LatLng(marker.lati, marker.long);
       let mapMarker = new google.maps.Marker({
         position: position,
@@ -157,6 +155,7 @@ export class GamePage implements OnInit {
       mapMarker.setMap(this.map);
       //this.addInfoWindowToMarker(mapMarker);
     }
-    
+
   }
+
 }
