@@ -34,33 +34,33 @@ export class GamePage implements OnInit {
       title: 'Estatua de la sardinera'
     },
     {
-     
+
       lati: 43.331710,
       long: -3.034654,
-   
-    title: 'Calle Itsasalde'
-  },
-  {
-     
-    lati: 43.330703,
-    long: -3.031600,
- 
-    title: 'Club de remo la Sotera'
-  },
-  {
-     
-    lati: 43.330703,
-    long: -3.031600,
 
-    title: 'Puerto de Santurtzi'
-  },
-  {
-     
-    lati: 43.328831,
-    long: -3.032961,
+      title: 'Calle Itsasalde'
+    },
+    {
 
-    title: 'Ayuntamiento de Santurtzi'
-  },
+      lati: 43.330703,
+      long: -3.031600,
+
+      title: 'Club de remo la Sotera'
+    },
+    {
+
+      lati: 43.330703,
+      long: -3.031600,
+
+      title: 'Puerto de Santurtzi'
+    },
+    {
+
+      lati: 43.328831,
+      long: -3.032961,
+
+      title: 'Ayuntamiento de Santurtzi'
+    },
   ];
   lati;
   long;
@@ -130,11 +130,12 @@ export class GamePage implements OnInit {
         disableDefaultUI: true,
         minZoom: 3
       });
+
       //cargar el mapa
       google.maps.event.addListenerOnce(this.map, 'idle', () => {
         mapEle.classList.add('show-map');
-
       });
+
 
       //marcador de posicion del usuario
       var marker = new google.maps.Marker({
@@ -161,7 +162,7 @@ export class GamePage implements OnInit {
         strokeWeight: 2
       });
 
-
+      this.map.clear();
 
 
     }).catch((error) => {
@@ -171,19 +172,46 @@ export class GamePage implements OnInit {
 
   }
   addMarker(markers) {
+
+    var infowindow = new google.maps.InfoWindow({
+      size: new google.maps.Size(150, 50)
+      
+    });
     for (let marker of markers) {
       let position = new google.maps.LatLng(marker.lati, marker.long);
       let mapMarker = new google.maps.Marker({
         position: position,
-        title: marker.title,
+        //title: marker.title,
         latitude: marker.lati,
         longitude: marker.long
+      })
+
+      let content = 
+      "<ion-card>"+ 
+        "<img src='../../assets/img/upvlogo.png' />" +
+        "<ion-card-header>"+
+          "<ion-card-subtitle>Destination</ion-card-subtitle>"+
+          "<ion-card-title>Madison, WI</ion-card-title>"+ 
+        "</ion-card-header> "+
+        "<ion-card-content> Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836. </ion-card-content> "+
+        "</ion-card>"
+      google.maps.event.addListener(mapMarker, 'click', function () {
+        infowindow.setContent(content);
+        infowindow.open(this.map, mapMarker);
+        //this.addOverlay();
       });
-
       mapMarker.setMap(this.map);
-      //this.addInfoWindowToMarker(mapMarker);
-    }
 
+    }
   }
+
+  addOverlay(){
+    let overlay = new google.maps.Overlay(
+      "algo"
+    )
+
+    overlay.setMap(this.map);
+  }
+
 
 }

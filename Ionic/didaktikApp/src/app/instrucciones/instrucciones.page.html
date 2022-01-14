@@ -8,8 +8,18 @@
 </ion-header>
 
 <ion-content>
-  <div class="container">
-    <p>Lat:{{lat}} Long:{{long}}</p>
-    <ion-button (click)="getPosition()">Enseñar</ion-button>
+  <ion-button (click)="showCard()">Click</ion-button>
+  <div id="container" [hidden]="!visible">
+    <ion-card>
+      <img src="../../assets/img/upvlogo.png" />
+      <ion-card-header>
+        <ion-card-subtitle>Destination</ion-card-subtitle>
+        <ion-card-title>Madison, WI</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the
+        Wisconsin Territory in 1836.
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
