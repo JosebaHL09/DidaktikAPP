@@ -49,8 +49,8 @@ export class GamePage implements OnInit {
     },
     {
 
-      lati: 43.330703,
-      long: -3.031600,
+      lati: 43.330603,
+      long: -3.031500,
 
       title: 'Puerto de Santurtzi'
     },
@@ -187,14 +187,14 @@ export class GamePage implements OnInit {
       })
 
       let content = 
-      "<ion-card>"+ 
+      "<div style='max-height: 100px;'><ion-card>"+ 
         "<img src='../../assets/img/upvlogo.png' />" +
         "<ion-card-header>"+
           "<ion-card-subtitle>Destination</ion-card-subtitle>"+
           "<ion-card-title>Madison, WI</ion-card-title>"+ 
         "</ion-card-header> "+
         "<ion-card-content> Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836. </ion-card-content> "+
-        "</ion-card>"
+        "</ion-card></div>"
       google.maps.event.addListener(mapMarker, 'click', function () {
         infowindow.setContent(content);
         infowindow.open(this.map, mapMarker);
