@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-
+import { Router } from '@angular/router';
 declare var google;
 
 @Component({
@@ -49,8 +49,8 @@ export class GamePage implements OnInit {
     },
     {
 
-      lati: 43.330603,
-      long: -3.031500,
+      lati: 43.330703,
+      long: -3.031600,
 
       title: 'Puerto de Santurtzi'
     },
@@ -65,7 +65,7 @@ export class GamePage implements OnInit {
   lati;
   long;
 
-  constructor(private geolocation: Geolocation) { }
+  constructor(private geolocation: Geolocation,private route: Router) { }
 
   ngOnInit() {
     this.loadMap();
@@ -172,46 +172,40 @@ export class GamePage implements OnInit {
 
   }
   addMarker(markers) {
+    //preguntar como quitar el max-width que genera google maps automaticamente
+    let content =
+      "<div id='mydiv' style='text-align:center'>" +
+      "<h3>Castillito bien bacano</h3>"+
+      "<img src='../../assets/img/castillo.jpg' height='150px' width='auto'/><br>" +
+      "<ion-button (click)='goInstrucciones()' color='dark'><ion-icon name='play-outline' style='font-size:20px'></ion-icon></ion-button>"+
+      "</div>"
 
     var infowindow = new google.maps.InfoWindow({
-      size: new google.maps.Size(150, 50)
-      
+      maxWidth: 250
     });
+    
     for (let marker of markers) {
       let position = new google.maps.LatLng(marker.lati, marker.long);
       let mapMarker = new google.maps.Marker({
         position: position,
-        //title: marker.title,
         latitude: marker.lati,
         longitude: marker.long
       })
 
-      let content = 
-      "<div style='max-height: 100px;'><ion-card>"+ 
-        "<img src='../../assets/img/upvlogo.png' />" +
-        "<ion-card-header>"+
-          "<ion-card-subtitle>Destination</ion-card-subtitle>"+
-          "<ion-card-title>Madison, WI</ion-card-title>"+ 
-        "</ion-card-header> "+
-        "<ion-card-content> Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836. </ion-card-content> "+
-        "</ion-card></div>"
+      
       google.maps.event.addListener(mapMarker, 'click', function () {
         infowindow.setContent(content);
         infowindow.open(this.map, mapMarker);
-        //this.addOverlay();
       });
       mapMarker.setMap(this.map);
-
     }
   }
-
-  addOverlay(){
-    let overlay = new google.maps.Overlay(
-      "algo"
-    )
-
-    overlay.setMap(this.map);
+  goInstrucciones() {
+    this.route.navigate(['/instrucciones']);
   }
-
-
+  
 }
+window.onload = () => {
+  let elem: HTMLElement = document.getElementById('mydiv');
+    elem.setAttribute("style", "color:red; border: 1px solid blue;");
+};
