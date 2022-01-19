@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'game',
     loadChildren: () => import('./game/game.module').then( m => m.GamePageModule)
+  },
+  {
+    path: 'gunea-info',
+    loadChildren: () => import('./gunea-info/gunea-info.module').then( m => m.GuneaInfoPageModule)
   }
 ];
 

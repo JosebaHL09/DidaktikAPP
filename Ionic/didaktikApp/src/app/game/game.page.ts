@@ -65,7 +65,7 @@ export class GamePage implements OnInit {
   lati;
   long;
 
-  constructor(private geolocation: Geolocation,private route: Router) { }
+  constructor(private geolocation: Geolocation, private route: Router) { }
 
   ngOnInit() {
     this.loadMap();
@@ -175,15 +175,15 @@ export class GamePage implements OnInit {
     //preguntar como quitar el max-width que genera google maps automaticamente
     let content =
       "<div id='mydiv' style='text-align:center'>" +
-      "<h3>Castillito bien bacano</h3>"+
+      "<h3>Castillito bien bacano</h3>" +
       "<img src='../../assets/img/castillo.jpg' height='150px' width='auto'/><br>" +
-      "<ion-button (click)='goInstrucciones()' color='dark'><ion-icon name='play-outline' style='font-size:20px'></ion-icon></ion-button>"+
+      "<ion-icon id='boton' name='play-outline' style='font-size:20px'>" +
       "</div>"
 
     var infowindow = new google.maps.InfoWindow({
       maxWidth: 250
     });
-    
+
     for (let marker of markers) {
       let position = new google.maps.LatLng(marker.lati, marker.long);
       let mapMarker = new google.maps.Marker({
@@ -191,21 +191,23 @@ export class GamePage implements OnInit {
         latitude: marker.lati,
         longitude: marker.long
       })
-
-      
       google.maps.event.addListener(mapMarker, 'click', function () {
         infowindow.setContent(content);
         infowindow.open(this.map, mapMarker);
       });
+      google.maps.event.addListener(infowindow, 'domready', () => {
+        var button = document.getElementById('boton');
+        button.addEventListener('click', () => {
+          this.goInfofo();
+        });
+      });
       mapMarker.setMap(this.map);
     }
   }
-  goInstrucciones() {
-    this.route.navigate(['/instrucciones']);
+
+  goInfofo() {
+    this.route.navigate(['/gunea-info']);
   }
-  
+
 }
-window.onload = () => {
-  let elem: HTMLElement = document.getElementById('mydiv');
-    elem.setAttribute("style", "color:red; border: 1px solid blue;");
-};
+

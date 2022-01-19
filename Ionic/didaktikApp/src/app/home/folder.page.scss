@@ -1,6 +1,9 @@
 ion-menu-button {
   color: var(--ion-color-primary);
 }
+ion-content {
+  --background: url('../../assets/img/fondo.jpg')  no-repeat;
+}
 
 #container {
   text-align: center;
