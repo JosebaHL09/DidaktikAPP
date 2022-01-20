@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'gunea-info',
     loadChildren: () => import('./gunea-info/gunea-info.module').then( m => m.GuneaInfoPageModule)
+  },
+  {
+    path: 'castillo-info',
+    loadChildren: () => import('./castillo-info/castillo-info.module').then( m => m.CastilloInfoPageModule)
   }
 ];
 

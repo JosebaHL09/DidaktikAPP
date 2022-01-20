@@ -18,6 +18,6 @@ export class InstruccionesPage implements OnInit {
   }
 
   goInstrucciones() {
-    this.route.navigate(['/game']);
+    this.route.navigate(['/castillo-info']);
   }
 }

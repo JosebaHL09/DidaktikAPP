@@ -5,6 +5,13 @@
 </ion-header>
 
 <ion-content>
+  <div id="overlay" class="overlay">
+    <a (click)="closeNav()" href="javascript:void(0)" class="closebtn">&times;</a>
+    <div class="overlay-content">
+      <img src="../../assets/img/castillo_1.jpg" alt="">
+      <img src="../../assets/img/castillo_2.jpg" alt="">
+    </div>
+  </div>
   <ion-card [scrollbar-y]>
     <img src="../../assets/img/castillo.jpg" alt="">
     <ion-card-header>
@@ -35,7 +42,7 @@
       <ion-fab-button color="light">
         <ion-icon name="game-controller-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="light">
+      <ion-fab-button (click)="openNav()" color="light">
         <ion-icon name="reload-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-button color="light" (click)="goMap()">

@@ -13,49 +13,49 @@ export class GamePage implements OnInit {
   map = null;
   markers: any = [
     {
-
+      id: 0,
       lati: 43.334481,
       long: -3.062792,
-
-      title: 'Primer castillo del monte Serantes'
+      title: 'Primer castillo del monte Serantes',
+      url: '/castillo-info',
+      img: '../../assets/img/castillo.jpg'
     },
     {
-
+      id: 1,
       lati: 43.332622,
       long: -3.040442,
-
       title: 'Mural Eskorbuto'
     },
     {
-
+      id: 2,
       lati: 43.334328,
       long: -3.039364,
 
       title: 'Estatua de la sardinera'
     },
     {
-
+      id: 3,
       lati: 43.331710,
       long: -3.034654,
 
       title: 'Calle Itsasalde'
     },
     {
-
+      id: 4,
       lati: 43.330703,
       long: -3.031600,
 
       title: 'Club de remo la Sotera'
     },
     {
-
+      id: 5,
       lati: 43.330703,
       long: -3.031600,
 
       title: 'Puerto de Santurtzi'
     },
     {
-
+      id: 6,
       lati: 43.328831,
       long: -3.032961,
 
@@ -173,41 +173,50 @@ export class GamePage implements OnInit {
   }
   addMarker(markers) {
     //preguntar como quitar el max-width que genera google maps automaticamente
-    let content =
-      "<div id='mydiv' style='text-align:center'>" +
-      "<h3>Castillito bien bacano</h3>" +
-      "<img src='../../assets/img/castillo.jpg' height='150px' width='auto'/><br>" +
-      "<ion-icon id='boton' name='play-outline' style='font-size:20px'>" +
-      "</div>"
-
-    var infowindow = new google.maps.InfoWindow({
-      maxWidth: 250
-    });
-
+    var infowindow,id;
     for (let marker of markers) {
+      let content =
+        "<div id='mydiv' style='text-align:center'>" +
+        "<h3>" + marker.title + "</h3>" +
+        "<img src=" + marker.img + " height='150px' width='auto'/><br>" +
+        "<ion-icon id='boton' name='play-outline' style='font-size:20px'>" +
+        "</div>"
+
+      infowindow = new google.maps.InfoWindow({
+        maxWidth: 250,
+      });
       let position = new google.maps.LatLng(marker.lati, marker.long);
       let mapMarker = new google.maps.Marker({
+        id:marker.id,
         position: position,
         latitude: marker.lati,
         longitude: marker.long
       })
       google.maps.event.addListener(mapMarker, 'click', function () {
+        id = this.id;
         infowindow.setContent(content);
         infowindow.open(this.map, mapMarker);
       });
-      google.maps.event.addListener(infowindow, 'domready', () => {
-        var button = document.getElementById('boton');
-        button.addEventListener('click', () => {
-          this.goInfofo();
-        });
-      });
       mapMarker.setMap(this.map);
     }
+    google.maps.event.addListener(infowindow, 'domready', () => {
+      var button = document.getElementById('boton');
+      button.addEventListener('click', () => {
+        this.route.navigate(['/'+this.getUrl(id)]);
+      });
+    });
+    
   }
 
-  goInfofo() {
-    this.route.navigate(['/gunea-info']);
+  getUrl(id){
+    var url;
+    for (let marker of this.markers) {
+      if(marker.id == id){
+        url = marker.url
+      } 
+    }
+    console.log(url)
+    return url
   }
-
 }
 
