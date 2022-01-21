@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'castillo-info',
     loadChildren: () => import('./castillo-info/castillo-info.module').then( m => m.CastilloInfoPageModule)
+  },
+  {
+    path: 'mural-info',
+    loadChildren: () => import('./mural-info/mural-info.module').then( m => m.MuralInfoPageModule)
   }
 ];
 

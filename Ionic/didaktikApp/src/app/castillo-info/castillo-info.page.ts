@@ -14,10 +14,10 @@ import { MenuController } from '@ionic/angular'
 export class CastilloInfoPage implements OnInit {
 
   constructor(private nativeAudio: NativeAudio, private route: Router,private menu: MenuController) { }
-
+  showVar
   ngOnInit() {
     this.playAudio();
-    //this.menu.disabled(true);
+    this.menu.enable(false);
   }
 
   playAudio(){
@@ -36,5 +36,9 @@ export class CastilloInfoPage implements OnInit {
   }
   closeNav() {
     document.getElementById("overlay").classList.remove('overlayshow');
+  }
+
+  changeSrc(){
+    this.showVar = !this.showVar;
   }
 }

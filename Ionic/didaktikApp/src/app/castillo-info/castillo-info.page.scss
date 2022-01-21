@@ -1,5 +1,5 @@
 ion-card {
-    max-height: 80%;
+    max-height: 85%;    
     display: flex;
     flex-direction: column;
     ::-webkit-scrollbar {
@@ -30,6 +30,8 @@ ion-card-content {
     }
     
 }
+
+
 .overlay {
     margin-top: 10%;
     position: fixed;

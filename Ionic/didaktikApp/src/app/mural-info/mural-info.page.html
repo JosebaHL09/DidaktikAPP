@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>DidaktikApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card [scrollbar-y]>
+    <img src="../../assets/img/mural_1.jpg" alt="">
+    <ion-card-header>
+      <ion-card-title>Eskorbuto</ion-card-title>
+    </ion-card-header>
+    <ion-card-content scrollY="true" id="info">
+      Y bueno… pues este es el mural, como bien habéis visto en el puzzle. ¿Sabéis qué es lo que no habréis podido ver
+      en el puzzle? Mira… mira acercaros un poco más al mural. Un poco más… El mural está hecho con trozos de baldosa.
+      Bueno eso era solo para que supierais.A lo que vamos, Eskorbuto fue un grupo de punk nacido aquí en Santurtzi. Se
+      creó hace muchos años y ha sido una de las bandas más importantes de punk en Europa. Por otra parte, la banda fue
+      una de las más conocidas del "rock radical vasco". Por eso, a día de hoy, Eskorbuto es un orgullo para el pueblo,
+      sobre todo para la generación de vuestros padres y madres.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="light">
+      <ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button color="light" (click)="showInfo()">
+        <ion-icon name="help-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="reload-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" (click)="goMap()">
+        <ion-icon name="exit-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

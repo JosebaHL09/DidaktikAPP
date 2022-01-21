@@ -24,7 +24,9 @@ export class GamePage implements OnInit {
       id: 1,
       lati: 43.332622,
       long: -3.040442,
-      title: 'Mural Eskorbuto'
+      title: 'Mural Eskorbuto',
+      url: '/mural-info',
+      img: '../../assets/img/mural.jpg'
     },
     {
       id: 2,
@@ -178,7 +180,7 @@ export class GamePage implements OnInit {
       let content =
         "<div id='mydiv' style='text-align:center'>" +
         "<h3>" + marker.title + "</h3>" +
-        "<img src=" + marker.img + " height='150px' width='auto'/><br>" +
+        "<img src=" + marker.img + " height='100px' width='auto'/><br>" +
         "<ion-icon id='boton' name='play-outline' style='font-size:20px'>" +
         "</div>"
 
@@ -198,6 +200,16 @@ export class GamePage implements OnInit {
         infowindow.open(this.map, mapMarker);
       });
       mapMarker.setMap(this.map);
+      var circle = new google.maps.Circle({
+        center: mapMarker.getPosition(),
+        radius: 100,
+        fillColor: "#fc3232",
+        fillOpacity: 0.1,
+        map: this.map,
+        strokeColor: "#ff0000",
+        strokeOpacity: 0.1,
+        strokeWeight: 2
+      });
     }
     google.maps.event.addListener(infowindow, 'domready', () => {
       var button = document.getElementById('boton');

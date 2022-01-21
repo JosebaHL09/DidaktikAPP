@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Castillito bacano</ion-title>
+    <ion-title>DidaktikApp</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,8 +8,7 @@
   <div id="overlay" class="overlay">
     <a (click)="closeNav()" href="javascript:void(0)" class="closebtn">&times;</a>
     <div class="overlay-content">
-      <img src="../../assets/img/castillo_1.jpg" alt="">
-      <img src="../../assets/img/castillo_2.jpg" alt="">
+      <img id="img" src="{{ showVar ? '../../../../assets/img/castillo_1.jpg' : '../../../../assets/img/castillo_2.jpg'}}" (click)="changeSrc()">
     </div>
   </div>
   <ion-card [scrollbar-y]>
