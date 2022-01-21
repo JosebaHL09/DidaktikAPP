@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NativeAudio } from '@awesome-cordova-plugins/native-audio/ngx';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular'
+import {Howl, Howler} from 'howler';
 
 
 
@@ -21,8 +22,10 @@ export class CastilloInfoPage implements OnInit {
   }
 
   playAudio(){
-    this.nativeAudio.preloadSimple('Leyenda', '../../assets/audio/Leyendas.mp3');
-    this.nativeAudio.play('Leyenda');
+    var sound = new Howl({
+      src: ['../assets/audio/Leyendas.mp3']
+    });
+    sound.play();
   }
 
   playGame(){
