@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guneak extends Model
 {
-    protected $fillable = ['izena','latitud', 'longitud','deskripzioa', 'irudia','audio','bideo'];
+    protected $fillable = ['izena','latitud', 'longitud', 'irudia'];
     use HasFactory;
 }

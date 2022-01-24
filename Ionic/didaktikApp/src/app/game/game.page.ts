@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Router } from '@angular/router';
+
+import { GuneaService } from '../services/gunea.service';
+import { Gunea } from '../interfaces/gunea';
+
 declare var google;
 
 @Component({
@@ -11,7 +15,9 @@ declare var google;
 export class GamePage implements OnInit {
 
   map = null;
-  markers: any = [
+  markers: Gunea[] = []
+  refresh = false;
+  /*markers: any = [
     {
       id: 0,
       lati: 43.334481,
@@ -63,13 +69,21 @@ export class GamePage implements OnInit {
 
       title: 'Ayuntamiento de Santurtzi'
     },
-  ];
+  ];*/
   lati;
   long;
 
-  constructor(private geolocation: Geolocation, private route: Router) { }
+  constructor(private geolocation: Geolocation, private route: Router, private guneaService: GuneaService) { }
+
+  getMarkers(): void {
+    this.guneaService.getGuneak(this.refresh)
+      .subscribe(data => { this.markers = data; },
+        error => console.log('Error::' + error));
+  }
+
 
   ngOnInit() {
+    this.getMarkers();
     this.loadMap();
   }
 
@@ -175,12 +189,12 @@ export class GamePage implements OnInit {
   }
   addMarker(markers) {
     //preguntar como quitar el max-width que genera google maps automaticamente
-    var infowindow,id;
+    var infowindow, id;
     for (let marker of markers) {
       let content =
         "<div id='mydiv' style='text-align:center'>" +
-        "<h3>" + marker.title + "</h3>" +
-        "<img src=" + marker.img + " height='100px' width='auto'/><br>" +
+        "<h3>" + marker.izena + "</h3>" +
+        "<img src=" + marker.irudia + " height='100px' width='auto'/><br>" +
         "<ion-icon id='boton' name='play-outline' style='font-size:20px'>" +
         "</div>"
 
@@ -189,10 +203,10 @@ export class GamePage implements OnInit {
       });
       let position = new google.maps.LatLng(marker.lati, marker.long);
       let mapMarker = new google.maps.Marker({
-        id:marker.id,
+        id: marker.id,
         position: position,
-        latitude: marker.lati,
-        longitude: marker.long
+        latitude: marker.latitud,
+        longitude: marker.longitud
       })
       google.maps.event.addListener(mapMarker, 'click', function () {
         id = this.id;
@@ -214,18 +228,18 @@ export class GamePage implements OnInit {
     google.maps.event.addListener(infowindow, 'domready', () => {
       var button = document.getElementById('boton');
       button.addEventListener('click', () => {
-        this.route.navigate(['/'+this.getUrl(id)]);
+        this.route.navigate(['/' + this.getUrl(id)]);
       });
     });
-    
+
   }
 
-  getUrl(id){
+  getUrl(id) {
     var url;
     for (let marker of this.markers) {
-      if(marker.id == id){
+      if (marker.id == id) {
         url = marker.url
-      } 
+      }
     }
     console.log(url)
     return url
