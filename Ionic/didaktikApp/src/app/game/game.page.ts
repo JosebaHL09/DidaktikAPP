@@ -15,9 +15,9 @@ declare var google;
 export class GamePage implements OnInit {
 
   map = null;
-  markers: Gunea[] = []
+  /*markers: Gunea[] = []*/
   refresh = false;
-  /*markers: any = [
+  markers: any = [
     {
       id: 0,
       lati: 43.334481,
@@ -69,21 +69,21 @@ export class GamePage implements OnInit {
 
       title: 'Ayuntamiento de Santurtzi'
     },
-  ];*/
+  ];
   lati;
   long;
 
-  constructor(private geolocation: Geolocation, private route: Router, private guneaService: GuneaService) { }
+  constructor(private geolocation: Geolocation, private route: Router, /*private guneaService: GuneaService*/) { }
 
-  getMarkers(): void {
+  /*getMarkers(): void {
     this.guneaService.getGuneak(this.refresh)
       .subscribe(data => { this.markers = data; },
         error => console.log('Error::' + error));
-  }
+  }*/
 
 
   ngOnInit() {
-    this.getMarkers();
+    //this.getMarkers();
     this.loadMap();
   }
 
@@ -193,8 +193,8 @@ export class GamePage implements OnInit {
     for (let marker of markers) {
       let content =
         "<div id='mydiv' style='text-align:center'>" +
-        "<h3>" + marker.izena + "</h3>" +
-        "<img src=" + marker.irudia + " height='100px' width='auto'/><br>" +
+        "<h3>" + marker.title + "</h3>" +
+        "<img src=" + marker.img + " height='100px' width='auto'/><br>" +
         "<ion-icon id='boton' name='play-outline' style='font-size:20px'>" +
         "</div>"
 
@@ -205,8 +205,8 @@ export class GamePage implements OnInit {
       let mapMarker = new google.maps.Marker({
         id: marker.id,
         position: position,
-        latitude: marker.latitud,
-        longitude: marker.longitud
+        latitude: marker.lati,
+        longitude: marker.longi
       })
       google.maps.event.addListener(mapMarker, 'click', function () {
         id = this.id;
