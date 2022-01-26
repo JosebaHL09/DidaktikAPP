@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>DidaktikApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card [scrollbar-y]>
+    <img src="../../assets/img/puerto.jpg" alt="">
+    <ion-card-header>
+      <ion-card-title>Puerto de Santurtzi</ion-card-title>
+    </ion-card-header>
+    <ion-card-content scrollY="true">
+      Si asomáis con mucho cuidado la cabeza al agua igual tenéis la suerte 
+      de encontraros algún pez. También os digo, no creo que sea una sardina, sino más bien un muble. 
+      Y es que las sardinas viven mar adentro por eso antes era habitual que los marineros se fueran
+      de pesca durante largos meses en busca de pescado.Se iban para equipar a un
+      pueblo que subsistía, económicamente hablando, del sector de la mar. Cuando volvían de haber pescado y la subasta de pescado se
+      había realizado, el olor a salitre, los barcos pesqueros, las redes y el olor a sardinas a
+      la parrilla era un panorama que se repetía muy a menudo. En cierto modo, las sardinas han sido el símbolo más representativo de Santurtzi.
+      La cultura pesquera sigue estando presente en los restaurantes, como podéis ver alrededor vuestro. De hecho, el emblema de 
+      la sardina es tan importante que incluso en varias banderas no oficiales es común encontrarla.
+</ion-card-content>
+  </ion-card>
+
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="light">
+      <ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button color="light">
+        <ion-icon name="game-controller-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="reload-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" (click)="goMap()">
+        <ion-icon name="exit-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

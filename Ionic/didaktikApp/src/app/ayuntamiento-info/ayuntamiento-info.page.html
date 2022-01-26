@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>DidaktikApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card [scrollbar-y]>
+    <img src="../../assets/img/mentxu.jpg" alt="">
+    <ion-card-header>
+      <ion-card-title>Ayuntamiento de Santurtzi</ion-card-title>
+    </ion-card-header>
+    <ion-card-content scrollY="true" id="info">
+      ¿Alguna vez la habéis visto? Mmmmm… Estoy segura de que sí. 
+      Lo que no creo que sepáis es esto que os voy a contar ahora mismo sobre La Mentxu.
+      </ion-card-content>
+  </ion-card>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="light">
+      <ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button color="light">
+        <ion-icon name="help-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="reload-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" (click)="goMap()">
+        <ion-icon name="exit-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

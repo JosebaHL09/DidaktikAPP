@@ -59,15 +59,17 @@ export class GamePage implements OnInit {
       id: 5,
       lati: 43.330703,
       long: -3.031600,
-
-      title: 'Puerto de Santurtzi'
+      title: 'Puerto de Santurtzi',
+      url: '/puerto-info',
+      img: '../../assets/img/puerto.jpg'
     },
     {
       id: 6,
       lati: 43.328831,
       long: -3.032961,
-
-      title: 'Ayuntamiento de Santurtzi'
+      title: 'Ayuntamiento de Santurtzi',
+      url: '/ayuntamiento-info',
+      img: '../../assets/img/mentxu.jpg'
     },
   ];
   lati;

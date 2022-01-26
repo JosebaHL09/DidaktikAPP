@@ -30,7 +30,15 @@ const routes: Routes = [
   {
     path: 'mural-info',
     loadChildren: () => import('./mural-info/mural-info.module').then( m => m.MuralInfoPageModule)
+  },  {
+    path: 'puerto-info',
+    loadChildren: () => import('./puerto-info/puerto-info.module').then( m => m.PuertoInfoPageModule)
+  },
+  {
+    path: 'ayuntamiento-info',
+    loadChildren: () => import('./ayuntamiento-info/ayuntamiento-info.module').then( m => m.AyuntamientoInfoPageModule)
   }
+
 ];
 
 @NgModule({
