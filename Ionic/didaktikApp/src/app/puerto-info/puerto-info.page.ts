@@ -14,7 +14,7 @@ import { Platform } from '@ionic/angular';
 })
 export class PuertoInfoPage implements OnInit {
   sound = new Howl({
-    src: ['../assets/audio/Las Sardinas.mp3']
+    src: ['../assets/audio/Las_Sardinas.mp3']
   });
   constructor(private route: Router, private menu: MenuController, private platform: Platform) {
     this.platform.backButton.subscribeWithPriority(10, () => {
