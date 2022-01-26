@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { from, Observable, of } from 'rxjs';
-import { switchMap, delay, tap } from 'rxjs/operators';
+import { map, switchMap, delay, tap } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
 import { CachingService } from './caching.service';
 import { NetworkService } from './network.service';
@@ -44,8 +44,7 @@ export class ApiService {
       }));
     }
   } private callAndCache(url): Observable<any> {
-    return this.http.get(url).pipe(delay(2000),
-      // Only for testing!      
+    return this.http.get(url).pipe(
       tap(res => {
         // Store our new data        
         this.cachingService.cacheRequest(url, res);

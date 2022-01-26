@@ -34,14 +34,14 @@
 
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button color="light">
+    <ion-fab-button color="light" [disabled]="!disableBtn()" id="btn">
       <ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="start">
       <ion-fab-button color="light">
         <ion-icon name="game-controller-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button (click)="openNav()" color="light">
+      <ion-fab-button (click)="replayAudio()" color="light">
         <ion-icon name="reload-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-button color="light" (click)="goMap()">

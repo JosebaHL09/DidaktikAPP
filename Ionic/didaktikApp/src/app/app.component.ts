@@ -6,14 +6,15 @@ import { CachingService } from './services/caching.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  constructor(private cachingService: CachingService) { this.cachingService.initStorage(); }
   public appPages = [
     { title: 'Inicio', url: '/home/', icon: 'home' },
     { title: 'Instrucciones', url: '/instrucciones/', icon: 'information-circle' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
+    { title: 'Castillo', url: '/castillo-info', icon: 'heart' },
+    { title: 'Mural', url: '/mural-info', icon: 'archive' },
+    { title: 'Estatua', url: '/estatua-info', icon: 'trash' },
     { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor(private cachingService: CachingService) { this.cachingService.initStorage(); }
+
 }

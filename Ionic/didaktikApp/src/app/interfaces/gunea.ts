@@ -1,8 +1,8 @@
 export interface Gunea {
     id: number,
     izena: string,
-    latitud: number,
-    longitud: number,
+    latitud: string,
+    longitud: string,
     irudia: string,
     url: string
 }

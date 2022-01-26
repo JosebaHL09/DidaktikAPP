@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'mural-info',
     loadChildren: () => import('./mural-info/mural-info.module').then( m => m.MuralInfoPageModule)
+  },
+  {
+    path: 'estatua-info',
+    loadChildren: () => import('./estatua-info/estatua-info.module').then( m => m.EstatuaInfoPageModule)
   }
 ];
 
