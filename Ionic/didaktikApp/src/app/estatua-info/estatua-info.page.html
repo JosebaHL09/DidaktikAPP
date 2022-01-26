@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>DidaktikApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card [scrollbar-y]>
+    <img src="../../assets/img/estatua.jpg" alt="">
+    <ion-card-header>
+      <ion-card-title id="title">Las Sardineras</ion-card-title>
+    </ion-card-header>
+    <ion-card-content scrollY="true" id="content">
+      Una pregunta, si os pido que penséis qué harías si quisierais comprar pescado
+      ¿cuál sería la respuesta? Igual lo primero que harías sería decirle a aita o ama, pero.. ¿No es cierto que lo más
+      probable es que fuerais a la pescadería? Pues hace muchos años tendrías que comprarle el pescado a aquellas
+      mujeres que se dedicaban a comprar el pescado que entraba en el puerto para luego venderlo en lugares cercanos. La
+      estatua que tenéis enfrente es la representación de ese oficio que hoy en día ya no existe. El paso del tiempo y
+      el desarrollo de medios más eficaces para la conservación y distribución de alimentos caducos hicieron que
+      desapareciera este comercio. Curioso, ¿verdad? Ahora escuchemos una de las canciones que se creó en homenaje a
+      estas mujeres, a ver si juntos podemos entender un poco mejor lo que hacían.
+
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="light">
+      <ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button color="light">
+        <ion-icon name="musical-notes-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="reload-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" (click)="goMap()">
+        <ion-icon name="exit-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

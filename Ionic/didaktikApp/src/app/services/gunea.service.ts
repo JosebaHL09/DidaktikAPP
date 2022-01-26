@@ -11,12 +11,11 @@ import { Gunea } from '../interfaces/gunea';
 export class GuneaService {
   private url = 'http://localhost:8000/api/guneaks';
   constructor(private apiService: ApiService, private http: HttpClient) { }
-  getGuneak(forceRefresh): Observable<Gunea[]> {
+  getGuneak(forceRefresh: boolean): Observable<Gunea[]> {
     return this.apiService.getData(this.url, forceRefresh);
   }
   getGunea(id: number): Observable<Gunea[]> {
     return this.http.get<Gunea[]>(this.url + '/' + id);
   }
-
 }
 

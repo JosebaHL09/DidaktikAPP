@@ -9,4 +9,7 @@
 
 <ion-content [fullscreen]="true">
   <div id="map"></div>
+  <ion-col *ngFor="let gunea of markers">
+    <h1>{{gunea.izena}}</h1>
+  </ion-col>
 </ion-content>

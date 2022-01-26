@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Router } from '@angular/router';
-
 import { GuneaService } from '../services/gunea.service';
 import { Gunea } from '../interfaces/gunea';
 
@@ -15,9 +14,9 @@ declare var google;
 export class GamePage implements OnInit {
 
   map = null;
-  /*markers: Gunea[] = []*/
+  markers: Gunea[] = [];
   refresh = false;
-  markers: any = [
+  /*markers: any = [
     {
       id: 0,
       lati: 43.334481,
@@ -71,25 +70,29 @@ export class GamePage implements OnInit {
       url: '/ayuntamiento-info',
       img: '../../assets/img/mentxu.jpg'
     },
-  ];
+  ];*/
   lati;
   long;
 
-  constructor(private geolocation: Geolocation, private route: Router, /*private guneaService: GuneaService*/) { }
+  constructor(private geolocation: Geolocation, private route: Router, private guneaService: GuneaService) { }
 
-  /*getMarkers(): void {
+  getMarkers(): void {
     this.guneaService.getGuneak(this.refresh)
       .subscribe(data => { this.markers = data; },
         error => console.log('Error::' + error));
-  }*/
+    //this.guneaService.getGuneak(this.refresh).subscription.unSuscribe();
+    console.log(this.markers.length)
+  }
 
 
   ngOnInit() {
-    //this.getMarkers();
+    this.getMarkers()
     this.loadMap();
+
   }
 
   loadMap() {
+
     this.geolocation.getCurrentPosition({
       timeout: 10000,
       enableHighAccuracy: true
@@ -168,7 +171,6 @@ export class GamePage implements OnInit {
         }
       });
       marker.setMap(this.map);
-      this.addMarker(this.markers);
       var circle = new google.maps.Circle({
         center: marker.getPosition(),
         radius: 100,
@@ -179,7 +181,7 @@ export class GamePage implements OnInit {
         strokeOpacity: 0.1,
         strokeWeight: 2
       });
-
+      this.addMarker();
       this.map.clear();
 
 
@@ -189,26 +191,25 @@ export class GamePage implements OnInit {
 
 
   }
-  addMarker(markers) {
-    //preguntar como quitar el max-width que genera google maps automaticamente
+  addMarker() {
     var infowindow, id;
-    for (let marker of markers) {
+    for (let marker of this.markers) {
       let content =
         "<div id='mydiv' style='text-align:center'>" +
-        "<h3>" + marker.title + "</h3>" +
-        "<img src=" + marker.img + " height='100px' width='auto'/><br>" +
+        "<h3>" + marker.izena + "</h3>" +
+        "<img src=" + marker.irudia + " height='100px' width='auto'/><br>" +
         "<ion-icon id='boton' name='play-outline' style='font-size:20px'>" +
         "</div>"
 
       infowindow = new google.maps.InfoWindow({
         maxWidth: 250,
       });
-      let position = new google.maps.LatLng(marker.lati, marker.long);
+      let position = new google.maps.LatLng(marker.latitud, marker.longitud);
       let mapMarker = new google.maps.Marker({
         id: marker.id,
         position: position,
-        latitude: marker.lati,
-        longitude: marker.longi
+        latitude: marker.latitud,
+        longitude: marker.longitud
       })
       google.maps.event.addListener(mapMarker, 'click', function () {
         id = this.id;

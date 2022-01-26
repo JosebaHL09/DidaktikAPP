@@ -33,6 +33,7 @@
     "cordova-plugin-nativeaudio": "^3.0.9",
     "cordova-sqlite-storage": "^6.0.0",
     "howler": "^2.2.3",
+    "leaflet": "^1.7.1",
     "localforage-cordovasqlitedriver": "^1.8.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
