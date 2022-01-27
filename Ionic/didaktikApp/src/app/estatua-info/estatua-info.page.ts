@@ -16,6 +16,7 @@ export class EstatuaInfoPage implements OnInit {
   ngOnInit() {
     this.playAudio1();
   }
+
   disable
   sound1 = new Howl({
     src: ['../assets/audio/Las_Sardineras.mp3'],

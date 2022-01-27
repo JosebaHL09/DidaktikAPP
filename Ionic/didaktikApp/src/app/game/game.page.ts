@@ -3,6 +3,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Router } from '@angular/router';
 import { GuneaService } from '../services/gunea.service';
 import { Gunea } from '../interfaces/gunea';
+import { Plugins } from 'protractor/built/plugins';
 
 declare var google;
 
@@ -76,6 +77,8 @@ export class GamePage implements OnInit {
   lati;
   long;
   marker
+  locationWatchStarted: boolean;
+  locationSubscription: any;
 
   constructor(private geolocation: Geolocation, private route: Router, private guneaService: GuneaService) { }
 
@@ -88,6 +91,9 @@ export class GamePage implements OnInit {
 
   ngOnInit() {
     this.getMarkers()
+  }
+  ngAfterViewInit() {
+    this.updateMarker();
   }
 
   loadMap() {
@@ -137,8 +143,8 @@ export class GamePage implements OnInit {
       // meter el mapa en el div que tenemos
       const mapEle: HTMLElement = document.getElementById('map');
       // poner las coordenadas
-      //const myLatLng = new google.maps.LatLng(this.lati, this.long);
-      const myLatLng = new google.maps.LatLng(43.334570, -3.064050);
+      const myLatLng = new google.maps.LatLng(this.lati, this.long);
+      //const myLatLng = new google.maps.LatLng(43.334570, -3.064050);
       // crear el mapa
       this.map = new google.maps.Map(mapEle, {
         center: myLatLng,
@@ -157,17 +163,7 @@ export class GamePage implements OnInit {
 
 
       //marcador de posicion del usuario
-      this.marker = new google.maps.Marker({
-        position: myLatLng,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 10,
-          fillOpacity: 1,
-          strokeWeight: 2,
-          fillColor: '#5384ED',
-          strokeColor: '#ffffff',
-        }
-      });
+      this.locateUser(myLatLng)
       this.marker.setMap(this.map);
       //setTimeout(this.updateMarker, 5000)
 
@@ -189,8 +185,11 @@ export class GamePage implements OnInit {
       console.log('Error getting location', error);
     });
 
+    this.updateMarker();
 
   }
+
+
   addMarker(marker1) {
     var infowindow, id;
     for (let marker of this.markers) {
@@ -257,27 +256,35 @@ export class GamePage implements OnInit {
         url = marker.url
       }
     }
-    
+
     return url
   }
 
-  /*
-  updateMarker() {
-    this.geolocation.getCurrentPosition({
-      timeout: 10000,
-      enableHighAccuracy: true
-    }).then((resp) => {
 
+  locateUser(myLatLng) {
+    this.marker = new google.maps.Marker({
+      position: myLatLng,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 10,
+        fillOpacity: 1,
+        strokeWeight: 2,
+        fillColor: '#5384ED',
+        strokeColor: '#ffffff',
+      }
+    });
+  }
+
+  updateMarker() {
+    this.locationSubscription = this.geolocation.watchPosition();
+    this.locationSubscription.subscribe((resp) => {
+      this.locationWatchStarted = true;
       this.lati = resp.coords.latitude
       this.long = resp.coords.longitude
       var myLatLng = new google.maps.LatLng(this.lati, this.long);
       this.marker.setPosition(myLatLng)
-      this.marker.setMap(this.map);
-      console.log("cambio")
-    }).catch((error) => {
-      console.log('Error getting location', error);
     });
-
-  }*/
+  }
 }
+
 
