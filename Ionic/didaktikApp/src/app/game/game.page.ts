@@ -209,6 +209,7 @@ export class GamePage implements OnInit {
         position: position,
       })
       google.maps.event.addListener(mapMarker, 'click', function () {
+        console.log(marker.url)
         id = this.id;
         infowindow.setContent(content);
         infowindow.open(this.map, mapMarker);
@@ -255,7 +256,7 @@ export class GamePage implements OnInit {
         url = marker.url
       }
     }
-    console.log(url)
+    
     return url
   }
 
