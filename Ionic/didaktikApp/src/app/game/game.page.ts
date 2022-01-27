@@ -14,9 +14,9 @@ declare var google;
 export class GamePage implements OnInit {
 
   map = null;
-  markers: Gunea[] = [];
+  //markers: Gunea[] = [];
   refresh = false;
-  /*markers: any = [
+  markers: any = [
     {
       id: 0,
       lati: 43.334481,
@@ -56,8 +56,8 @@ export class GamePage implements OnInit {
     },
     {
       id: 5,
-      lati: 43.330703,
-      long: -3.031600,
+      lati: 43.329965,
+      long: -3.029433,
       title: 'Puerto de Santurtzi',
       url: '/puerto-info',
       img: '../../assets/img/puerto.jpg'
@@ -70,29 +70,29 @@ export class GamePage implements OnInit {
       url: '/ayuntamiento-info',
       img: '../../assets/img/mentxu.jpg'
     },
-  ];*/
+  ];
   lati;
   long;
+  marker;
 
-  constructor(private geolocation: Geolocation, private route: Router, private guneaService: GuneaService) { }
+  constructor(private geolocation: Geolocation, private route: Router, /*private guneaService: GuneaService*/) { }
 
-  getMarkers(): void {
+  /*getMarkers(): void {
     this.guneaService.getGuneak(this.refresh)
       .subscribe(data => { this.markers = data; },
         error => console.log('Error::' + error));
     //this.guneaService.getGuneak(this.refresh).subscription.unSuscribe();
     console.log(this.markers.length)
-  }
+  }*/
 
 
   ngOnInit() {
-    this.getMarkers()
+    //this.getMarkers()
     this.loadMap();
 
   }
 
   loadMap() {
-
     this.geolocation.getCurrentPosition({
       timeout: 10000,
       enableHighAccuracy: true
@@ -139,8 +139,8 @@ export class GamePage implements OnInit {
       // meter el mapa en el div que tenemos
       const mapEle: HTMLElement = document.getElementById('map');
       // poner las coordenadas
-      const myLatLng = new google.maps.LatLng(this.lati, this.long);
-
+      //const myLatLng = new google.maps.LatLng(this.lati, this.long);
+      const myLatLng = new google.maps.LatLng(43.334570, -3.064050);
       // crear el mapa
       this.map = new google.maps.Map(mapEle, {
         center: myLatLng,
@@ -159,7 +159,7 @@ export class GamePage implements OnInit {
 
 
       //marcador de posicion del usuario
-      var marker = new google.maps.Marker({
+      this.marker = new google.maps.Marker({
         position: myLatLng,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
@@ -170,10 +170,12 @@ export class GamePage implements OnInit {
           strokeColor: '#ffffff',
         }
       });
-      marker.setMap(this.map);
+      this.marker.setMap(this.map);
+      //setTimeout(this.updateMarker, 5000)
+
       var circle = new google.maps.Circle({
-        center: marker.getPosition(),
-        radius: 100,
+        center: this.marker.getPosition(),
+        radius: 50,
         fillColor: "#0000FF",
         fillOpacity: 0.1,
         map: this.map,
@@ -181,7 +183,7 @@ export class GamePage implements OnInit {
         strokeOpacity: 0.1,
         strokeWeight: 2
       });
-      this.addMarker();
+      this.addMarker(this.markers, this.marker);
       this.map.clear();
 
 
@@ -191,25 +193,23 @@ export class GamePage implements OnInit {
 
 
   }
-  addMarker() {
+  addMarker(markers, marker) {
     var infowindow, id;
-    for (let marker of this.markers) {
+    for (let marker of markers) {
       let content =
         "<div id='mydiv' style='text-align:center'>" +
-        "<h3>" + marker.izena + "</h3>" +
-        "<img src=" + marker.irudia + " height='100px' width='auto'/><br>" +
+        "<h3>" + marker.title + "</h3>" +
+        "<img src=" + marker.img + " height='100px' width='auto'/><br>" +
         "<ion-icon id='boton' name='play-outline' style='font-size:20px'>" +
         "</div>"
 
       infowindow = new google.maps.InfoWindow({
         maxWidth: 250,
       });
-      let position = new google.maps.LatLng(marker.latitud, marker.longitud);
+      let position = new google.maps.LatLng(marker.lati, marker.long);
       let mapMarker = new google.maps.Marker({
         id: marker.id,
         position: position,
-        latitude: marker.latitud,
-        longitude: marker.longitud
       })
       google.maps.event.addListener(mapMarker, 'click', function () {
         id = this.id;
@@ -219,7 +219,7 @@ export class GamePage implements OnInit {
       mapMarker.setMap(this.map);
       var circle = new google.maps.Circle({
         center: mapMarker.getPosition(),
-        radius: 100,
+        radius: 50,
         fillColor: "#fc3232",
         fillOpacity: 0.1,
         map: this.map,
@@ -230,11 +230,25 @@ export class GamePage implements OnInit {
     }
     google.maps.event.addListener(infowindow, 'domready', () => {
       var button = document.getElementById('boton');
-      button.addEventListener('click', () => {
-        this.route.navigate(['/' + this.getUrl(id)]);
-      });
+      var distance = this.getDistance(infowindow, marker)
+      if (distance <= 100) {
+        button.addEventListener('click', () => {
+          this.route.navigate(['/' + this.getUrl(id)]);
+        });
+      }
     });
 
+  }
+
+  getDistance(p1, p2) {
+    var R = 6371000
+    var rlat1 = p1.position.lat() * (Math.PI / 180); // Convert degrees to radians
+    var rlat2 = p2.position.lat() * (Math.PI / 180); // Convert degrees to radians
+    var difflat = rlat2 - rlat1; // Radian difference (latitudes)
+    var difflon = (p2.position.lng() - p1.position.lng()) * (Math.PI / 180);
+
+    var d = 2 * R * Math.atan(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
+    return d;
   }
 
   getUrl(id) {
@@ -247,5 +261,24 @@ export class GamePage implements OnInit {
     console.log(url)
     return url
   }
+
+  /*
+  updateMarker() {
+    this.geolocation.getCurrentPosition({
+      timeout: 10000,
+      enableHighAccuracy: true
+    }).then((resp) => {
+
+      this.lati = resp.coords.latitude
+      this.long = resp.coords.longitude
+      var myLatLng = new google.maps.LatLng(this.lati, this.long);
+      this.marker.setPosition(myLatLng)
+      this.marker.setMap(this.map);
+      console.log("cambio")
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
+  }*/
 }
 
