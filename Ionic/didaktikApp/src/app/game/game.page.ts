@@ -52,8 +52,9 @@ export class GamePage implements OnInit {
       id: 4,
       lati: 43.330703,
       long: -3.031600,
-
-      title: 'Club de remo la Sotera'
+      title: 'Club de remo la Sotera',
+      url: '/remo-info',
+      img: '../../assets/img/remo.jpg'
     },
     {
       id: 5,
