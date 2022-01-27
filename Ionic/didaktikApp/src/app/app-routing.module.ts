@@ -45,7 +45,11 @@ const routes: Routes = [
     path: 'estatua-info',
     loadChildren: () => import('./estatua-info/estatua-info.module').then( m => m.EstatuaInfoPageModule)
 
+  },  {
+    path: 'remo-info',
+    loadChildren: () => import('./remo-info/remo-info.module').then( m => m.RemoInfoPageModule)
   }
+
 
 ];
 

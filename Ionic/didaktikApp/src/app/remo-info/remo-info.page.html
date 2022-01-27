@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>DidaktikApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <iframe src="https://www.youtube.com/embed/iu3GEF4hB6Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <ion-card [scrollbar-y]>
+    <img src="../../assets/img/remo.jpg" alt="">
+    <ion-card-header>
+      <ion-card-title>Club de remo la Sotera</ion-card-title>
+    </ion-card-header>
+    <ion-card-content scrollY="true">
+    ¿Podéis ver el mar? ¿Algo que tenga que ver con la pesca? Seguramente
+    ya sabréis que Santurtzi es un pueblo directamente relacionado con la 
+    pesca. Pues esto es importante para que entendáis de dónde viene La sotera, 
+    el club de remo de Santurtzi, que también es conocido como Itsasoko Ama. 
+    Las traineras son parte de la tradición del pueblo. Antes estaba dirigido a conseguir 
+    pescado para alimentar al pueblo, pero desde hace 60 años más o menos se creó el club 
+    y han estado compitiendo hasta ahora. Además, ¡hace poco han ganado la Liga!
+   </ion-card-content>
+  </ion-card>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="light">
+      <ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button color="light">
+        <ion-icon name="game-controller-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="reload-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" (click)="goMap()">
+        <ion-icon name="exit-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>
