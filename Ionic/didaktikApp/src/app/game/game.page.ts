@@ -14,9 +14,9 @@ declare var google;
 export class GamePage implements OnInit {
 
   map = null;
-  //markers: Gunea[] = [];
+  markers: Gunea[] = [];
   refresh = false;
-  markers: any = [
+  /*markers: any = [
     {
       id: 0,
       lati: 43.334481,
@@ -37,8 +37,9 @@ export class GamePage implements OnInit {
       id: 2,
       lati: 43.334328,
       long: -3.039364,
-
-      title: 'Estatua de la sardinera'
+      title: 'Estatua de la sardinera',
+      url: '/estatua-info',
+      img: '../../assets/img/estatua.jpg'
     },
     {
       id: 3,
@@ -70,26 +71,22 @@ export class GamePage implements OnInit {
       url: '/ayuntamiento-info',
       img: '../../assets/img/mentxu.jpg'
     },
-  ];
+  ];*/
   lati;
   long;
-  marker;
+  marker
 
-  constructor(private geolocation: Geolocation, private route: Router, /*private guneaService: GuneaService*/) { }
+  constructor(private geolocation: Geolocation, private route: Router, private guneaService: GuneaService) { }
 
-  /*getMarkers(): void {
+  getMarkers(): void {
     this.guneaService.getGuneak(this.refresh)
-      .subscribe(data => { this.markers = data; },
+      .subscribe(data => { this.markers = data; this.loadMap(); },
         error => console.log('Error::' + error));
-    //this.guneaService.getGuneak(this.refresh).subscription.unSuscribe();
-    console.log(this.markers.length)
-  }*/
+  }
 
 
   ngOnInit() {
-    //this.getMarkers()
-    this.loadMap();
-
+    this.getMarkers()
   }
 
   loadMap() {
@@ -183,7 +180,7 @@ export class GamePage implements OnInit {
         strokeOpacity: 0.1,
         strokeWeight: 2
       });
-      this.addMarker(this.markers, this.marker);
+      this.addMarker(this.marker);
       this.map.clear();
 
 
@@ -193,20 +190,20 @@ export class GamePage implements OnInit {
 
 
   }
-  addMarker(markers, marker) {
+  addMarker(marker1) {
     var infowindow, id;
-    for (let marker of markers) {
+    for (let marker of this.markers) {
       let content =
         "<div id='mydiv' style='text-align:center'>" +
-        "<h3>" + marker.title + "</h3>" +
-        "<img src=" + marker.img + " height='100px' width='auto'/><br>" +
+        "<h3>" + marker.izena + "</h3>" +
+        "<img src=" + marker.irudia + " height='100px' width='auto'/><br>" +
         "<ion-icon id='boton' name='play-outline' style='font-size:20px'>" +
         "</div>"
 
       infowindow = new google.maps.InfoWindow({
         maxWidth: 250,
       });
-      let position = new google.maps.LatLng(marker.lati, marker.long);
+      let position = new google.maps.LatLng(marker.latitud, marker.longitud);
       let mapMarker = new google.maps.Marker({
         id: marker.id,
         position: position,
@@ -230,8 +227,8 @@ export class GamePage implements OnInit {
     }
     google.maps.event.addListener(infowindow, 'domready', () => {
       var button = document.getElementById('boton');
-      var distance = this.getDistance(infowindow, marker)
-      if (distance <= 100) {
+      var distance = this.getDistance(infowindow, marker1)
+      if (distance >= 0 /*<100*/) {
         button.addEventListener('click', () => {
           this.route.navigate(['/' + this.getUrl(id)]);
         });

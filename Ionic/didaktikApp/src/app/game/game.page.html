@@ -9,4 +9,15 @@
 
 <ion-content [fullscreen]="true">
   <div id="map"></div>
+  <ion-col *ngFor="let gunea of markers">
+    <ion-item-divider color="light">
+      <ion-row>
+        <h1>{{gunea.izena}}</h1>
+        <h1>{{gunea.latitud}}</h1>
+        <h1>{{gunea.longitud}}</h1>
+        <h1>{{gunea.irudia}}</h1>
+        <h1>{{gunea.url}}</h1>
+      </ion-row>
+    </ion-item-divider>
+  </ion-col>
 </ion-content>
