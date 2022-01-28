@@ -25,7 +25,7 @@
 
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button color="light">
+    <ion-fab-button color="light" [disabled]="!disableBtn()" id="btn">
       <ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="start">

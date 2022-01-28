@@ -10,12 +10,16 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['./remo-info.page.scss'],
 })
 export class RemoInfoPage implements OnInit {
+  showVar
+  disable
   sound = new Howl({
-   
     src: ['../assets/audio/Sotera.mp3'],
     volume: 0.15,
     onend: function () {
       (document.getElementById('btn') as HTMLInputElement).disabled = false;
+    },
+    onload: function () {
+      document.getElementById("overlay").classList.add('overlayshow');
     }
   });
   constructor(private route: Router, private menu: MenuController, private platform: Platform) {
@@ -23,10 +27,11 @@ export class RemoInfoPage implements OnInit {
       this.stopAudio()
     });
   }
-  showVar
   ngOnInit() {
-    this.playAudio();
     this.menu.enable(false);
+  }
+  disableBtn() {
+    this.disable = !this.disable;
   }
 
   playAudio() {
@@ -43,5 +48,13 @@ export class RemoInfoPage implements OnInit {
   goMap() {
     this.stopAudio()
     this.route.navigate(['/game']);
+  }
+  openNav() {
+    document.getElementById("overlay").classList.add('overlayshow');
+    (document.getElementById("closebtn") as HTMLInputElement).disabled = true;
+  }
+  closeNav() {
+    document.getElementById("overlay").classList.remove('overlayshow');
+    this.playAudio();
   }
 }

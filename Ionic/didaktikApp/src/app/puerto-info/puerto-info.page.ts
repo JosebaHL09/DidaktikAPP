@@ -13,20 +13,27 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['./puerto-info.page.scss'],
 })
 export class PuertoInfoPage implements OnInit {
+  showVar
+  disable
   sound = new Howl({
-    src: ['../assets/audio/Las_Sardinas.mp3']
+    src: ['../assets/audio/Las_Sardinas.mp3'],
+    volume: 0.80,
+    onend: function () {
+      (document.getElementById('btn') as HTMLInputElement).disabled = false;
+    }
   });
   constructor(private route: Router, private menu: MenuController, private platform: Platform) {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.stopAudio()
     });
   }
-  showVar
   ngOnInit() {
     this.playAudio();
     this.menu.enable(false);
   }
-
+  disableBtn() {
+    this.disable = !this.disable;
+  }
 
   playAudio() {
     this.sound.play();
