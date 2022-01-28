@@ -12,7 +12,7 @@ import { Platform } from '@ionic/angular';
 export class RemoInfoPage implements OnInit {
   sound = new Howl({
    
-    src: ['../assets/audio/.mp3'],
+    src: ['../assets/audio/Sotera.mp3'],
     volume: 0.15,
     onend: function () {
       (document.getElementById('btn') as HTMLInputElement).disabled = false;
