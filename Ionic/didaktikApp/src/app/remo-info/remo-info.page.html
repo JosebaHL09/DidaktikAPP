@@ -5,9 +5,14 @@
 </ion-header>
 
 <ion-content>
-  <iframe src="https://www.youtube.com/embed/iu3GEF4hB6Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div id="overlay" class="overlay">
+    <a id="closebtn" (click)="closeNav()" href="javascript:void(0)" class="closebtn" [disabled]="!disableBtn()">&times;</a>
+    <div class="overlay-content">
+      <iframe src= "https://www.youtube.com/embed/iu3GEF4hB6Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
   <ion-card [scrollbar-y]>
-    <img src="../../assets/img/remo.jpg" alt="">
+    <img src="../../assets/img/club.jpg" alt="">
     <ion-card-header>
       <ion-card-title>Club de remo la Sotera</ion-card-title>
     </ion-card-header>
@@ -22,7 +27,7 @@
    </ion-card-content>
   </ion-card>
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button color="light">
+    <ion-fab-button color="light" [disabled]="!disableBtn()" id="btn">
       <ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="start">

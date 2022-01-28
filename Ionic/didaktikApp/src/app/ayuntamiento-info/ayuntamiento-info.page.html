@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content>
+  
   <ion-card [scrollbar-y]>
     <img src="../../assets/img/mentxu.jpg" alt="">
     <ion-card-header>
@@ -22,7 +23,7 @@
     </ion-fab-button>
     <ion-fab-list side="start">
       <ion-fab-button color="light">
-        <ion-icon name="help-outline"></ion-icon>
+        <ion-icon name="book-outline" (click)="verLibro()"></ion-icon>
       </ion-fab-button>
       <ion-fab-button color="light">
         <ion-icon name="reload-outline"></ion-icon>
