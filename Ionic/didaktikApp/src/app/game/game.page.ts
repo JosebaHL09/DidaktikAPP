@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 import { Router } from '@angular/router';
+import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationEvents, BackgroundGeolocationResponse } from '@awesome-cordova-plugins/background-geolocation/ngx';
 import { GuneaService } from '../services/gunea.service';
 import { Gunea } from '../interfaces/gunea';
-import { Plugins } from 'protractor/built/plugins';
+
 
 declare var google;
+
 
 @Component({
   selector: 'app-game',
@@ -15,9 +17,9 @@ declare var google;
 export class GamePage implements OnInit {
 
   map = null;
-  markers: Gunea[] = [];
+  //markers: Gunea[] = [];
   refresh = false;
-  /*markers: any = [
+  markers: any = [
     {
       id: 0,
       lati: 43.334481,
@@ -73,27 +75,25 @@ export class GamePage implements OnInit {
       url: '/ayuntamiento-info',
       img: '../../assets/img/mentxu.jpg'
     },
-  ];*/
+  ];
   lati;
   long;
   marker
   locationWatchStarted: boolean;
   locationSubscription: any;
 
-  constructor(private geolocation: Geolocation, private route: Router, private guneaService: GuneaService) { }
+  constructor(private geolocation: Geolocation, private route: Router, /*private guneaService: GuneaService*/) { }
 
-  getMarkers(): void {
-    this.guneaService.getGuneak(this.refresh)
-      .subscribe(data => { this.markers = data; this.loadMap(); },
-        error => console.log('Error::' + error));
-  }
+  /* getMarkers(): void {
+     this.guneaService.getGuneak(this.refresh)
+       .subscribe(data => { this.markers = data; this.loadMap1(); },
+         error => console.log('Error::' + error));
+   }*/
 
 
   ngOnInit() {
-    this.getMarkers()
-  }
-  ngAfterViewInit() {
-    this.updateMarker();
+    //this.getMarkers()
+    this.loadMap()
   }
 
   loadMap() {
@@ -149,6 +149,7 @@ export class GamePage implements OnInit {
       this.map = new google.maps.Map(mapEle, {
         center: myLatLng,
         zoom: 16,
+        locationButton: true,
         styles: style,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         streetViewControl: false,
@@ -161,32 +162,17 @@ export class GamePage implements OnInit {
         mapEle.classList.add('show-map');
       });
 
-
       //marcador de posicion del usuario
-      this.locateUser(myLatLng)
-      this.marker.setMap(this.map);
-      //setTimeout(this.updateMarker, 5000)
-
-      var circle = new google.maps.Circle({
-        center: this.marker.getPosition(),
-        radius: 50,
-        fillColor: "#0000FF",
-        fillOpacity: 0.1,
-        map: this.map,
-        strokeColor: "#FFFFFF",
-        strokeOpacity: 0.1,
-        strokeWeight: 2
-      });
       this.addMarker(this.marker);
-      this.map.clear();
+      this.locateUser(myLatLng)
+      /*google.maps.event.addListener(this.map, 'click', () => {
+        this.updateMarker()
+      });
 
-
+      document.getElementById('btn')*/
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-
-    this.updateMarker();
-
   }
 
 
@@ -195,15 +181,15 @@ export class GamePage implements OnInit {
     for (let marker of this.markers) {
       let content =
         "<div id='mydiv' style='text-align:center'>" +
-        "<h3>" + marker.izena + "</h3>" +
-        "<img src=" + marker.irudia + " height='100px' width='auto'/><br>" +
+        "<h3>" + marker.title + "</h3>" +
+        "<img src=" + marker.img + " height='100px' width='auto'/><br>" +
         "<ion-icon id='boton' name='play-outline' style='font-size:20px'>" +
         "</div>"
 
       infowindow = new google.maps.InfoWindow({
         maxWidth: 250,
       });
-      let position = new google.maps.LatLng(marker.latitud, marker.longitud);
+      let position = new google.maps.LatLng(marker.lati, marker.long);
       let mapMarker = new google.maps.Marker({
         id: marker.id,
         position: position,
@@ -260,10 +246,9 @@ export class GamePage implements OnInit {
     return url
   }
 
-
   locateUser(myLatLng) {
     this.marker = new google.maps.Marker({
-      position: myLatLng,
+
       icon: {
         path: google.maps.SymbolPath.CIRCLE,
         scale: 10,
@@ -273,18 +258,40 @@ export class GamePage implements OnInit {
         strokeColor: '#ffffff',
       }
     });
+    this.marker.setPosition(myLatLng)
+    var circle = new google.maps.Circle({
+      center: myLatLng,
+      radius: 50,
+      fillColor: "#0000FF",
+      fillOpacity: 0.1,
+      map: this.map,
+      strokeColor: "#FFFFFF",
+      strokeOpacity: 0.1,
+      strokeWeight: 2
+    });
+    this.marker.bindTo("position", circle, "center");
+    this.marker.setMap(this.map);
   }
 
   updateMarker() {
-    this.locationSubscription = this.geolocation.watchPosition();
-    this.locationSubscription.subscribe((resp) => {
-      this.locationWatchStarted = true;
-      this.lati = resp.coords.latitude
-      this.long = resp.coords.longitude
-      var myLatLng = new google.maps.LatLng(this.lati, this.long);
+    let watch = this.geolocation.watchPosition();
+    watch.subscribe(async (data: Geoposition) => {
+      console.log(data.coords.latitude)
+      console.log(data.coords.longitude)
+      this.lati = data.coords.latitude
+      this.long = data.coords.longitude
+      var myLatLng = new google.maps.LatLng(this.lati, this.long)
       this.marker.setPosition(myLatLng)
+      this.marker.setMap(this.map)
+      this.map.animateCamera({
+        target:myLatLng,
+        padding:0
+      })
+      console.log('data', data)
     });
+    //watch.unsubscribe();
   }
 }
+
 
 
