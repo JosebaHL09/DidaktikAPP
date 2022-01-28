@@ -9,4 +9,9 @@
 
 <ion-content [fullscreen]="true">
   <div id="map"></div>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="light" id="btn" (click)="updateMarker()">
+      <ion-icon md="caret-back" ios="location-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
