@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationEvents, BackgroundGeolocationResponse } from '@awesome-cordova-plugins/background-geolocation/ngx';
 import { GuneaService } from '../services/gunea.service';
 import { Gunea } from '../interfaces/gunea';
+import { ToastController } from '@ionic/angular';
 
 
 declare var google;
@@ -82,7 +83,7 @@ export class GamePage implements OnInit {
   locationWatchStarted: boolean;
   locationSubscription: any;
 
-  constructor(private geolocation: Geolocation, private route: Router, /*private guneaService: GuneaService*/) { }
+  constructor(private geolocation: Geolocation, private route: Router, public toastController: ToastController/*private guneaService: GuneaService*/) { }
 
   /* getMarkers(): void {
      this.guneaService.getGuneak(this.refresh)
@@ -213,9 +214,10 @@ export class GamePage implements OnInit {
       });
     }
     google.maps.event.addListener(infowindow, 'domready', () => {
+
       var button = document.getElementById('boton');
       var distance = this.getDistance(infowindow, marker1)
-      if (distance >= 0 /*<100*/) {
+      if (distance <= 100) {
         button.addEventListener('click', () => {
           this.route.navigate(['/' + this.getUrl(id)]);
         });
@@ -223,6 +225,8 @@ export class GamePage implements OnInit {
     });
 
   }
+
+
 
   getDistance(p1, p2) {
     var R = 6371000
@@ -283,13 +287,9 @@ export class GamePage implements OnInit {
       var myLatLng = new google.maps.LatLng(this.lati, this.long)
       this.marker.setPosition(myLatLng)
       this.marker.setMap(this.map)
-      this.map.animateCamera({
-        target:myLatLng,
-        padding:0
-      })
+      this.map.panTo(myLatLng)
       console.log('data', data)
     });
-    //watch.unsubscribe();
   }
 }
 

@@ -5,6 +5,9 @@ ion-content {
   --background: url('../../assets/img/fondo.jpg')  no-repeat;
 }
 
+  
+
+
 #container {
   text-align: center;
   position: absolute;
@@ -47,4 +50,9 @@ ion-img{
 
 #buttons ion-icon{
   margin-right: 2%;
+}
+
+#btn{
+  height:5rem;
+  border-radius: 1px;
 }
