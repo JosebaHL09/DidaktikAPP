@@ -164,8 +164,8 @@ export class GamePage implements OnInit {
       });
 
       //marcador de posicion del usuario
-      this.addMarker(this.marker);
       this.locateUser(myLatLng)
+      this.addMarker(this.marker);
       /*google.maps.event.addListener(this.map, 'click', () => {
         this.updateMarker()
       });
@@ -214,10 +214,11 @@ export class GamePage implements OnInit {
       });
     }
     google.maps.event.addListener(infowindow, 'domready', () => {
-
       var button = document.getElementById('boton');
       var distance = this.getDistance(infowindow, marker1)
+      console.log(distance)
       if (distance <= 100) {
+        alert("a")
         button.addEventListener('click', () => {
           this.route.navigate(['/' + this.getUrl(id)]);
         });
