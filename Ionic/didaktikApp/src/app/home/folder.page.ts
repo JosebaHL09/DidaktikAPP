@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-folder',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class FolderPage implements OnInit {
   public folder: string;
 
-  constructor(private activatedRoute: ActivatedRoute, public alertCtrl: AlertController, private route: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, public alertCtrl: AlertController, private route: Router, private menu: MenuController) { }
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
@@ -24,14 +25,17 @@ export class FolderPage implements OnInit {
     });
     await alert.present();
   }
-  
 
+  async openMenu() {
+    await this.menu.open();
+  }
   goInstrucciones() {
     this.route.navigate(['/instrucciones']);
   }
   goJuego() {
-    
+
     this.route.navigate(['/game']);
   }
+
 
 }
