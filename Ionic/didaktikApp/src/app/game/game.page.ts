@@ -218,7 +218,6 @@ export class GamePage implements OnInit {
       var distance = this.getDistance(infowindow, marker1)
       console.log(distance)
       if (distance <= 100) {
-        alert("a")
         button.addEventListener('click', () => {
           this.route.navigate(['/' + this.getUrl(id)]);
         });
