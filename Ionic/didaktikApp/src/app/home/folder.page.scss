@@ -38,21 +38,28 @@ ion-img{
   margin-right: auto;
   width: 50%;
 }
-#buttons{
-  margin-top: 10%;
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
-}
-#buttons ion-button{
-  margin-top: 4%;
-}
 
-#buttons ion-icon{
-  margin-right: 2%;
-}
 
 #btn{
+  width: 70%;
   height:5rem;
-  border-radius: 1px;
+  border-radius: 50px;
+  background-color: #F23333;
+  border: 2px solid black;
+}
+#icon{
+  padding: 15px;
+  float: left;
+  font-size: 25px;
+  border-radius: 50px;
+  background-color: white;
+}
+#text{
+  font-family: "Luckiest Guy";
+  margin-left: 5%;
+  float: left;
+}
+
+#logo{
+  width: 80%;
 }

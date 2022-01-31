@@ -6,12 +6,17 @@
   </ion-header>-->
 
   <div id="container">
-    <ion-title>DidaktikApp</ion-title>
     <ion-img src="../../assets/img/mascota.png"></ion-img>
-    <div id="buttons">
-      <ion-button (click)="goJuego()" expand="block" id="btn">
-        <ion-icon name="game-controller-outline"></ion-icon>Nueva partida
-      </ion-button>
-    </div>
+    <img src="../../assets/img/logo.png" alt="" id="logo">
+
+    <button (click)="goJuego()" expand="block" id="btn" color="primary">
+      <div id="icon">
+        <ion-icon name="game-controller-outline"></ion-icon>
+      </div>
+      <div id="text">
+        <h5>Nueva partida</h5>
+      </div>
+    </button>
   </div>
+
 </ion-content>
