@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DocumentViewer } from '@awesome-cordova-plugins/document-viewer/ngx';
+//import { DocumentViewer } from '@awesome-cordova-plugins/document-viewer/ngx';
 
 @Component({
   selector: 'app-ayuntamiento-info',
@@ -9,7 +9,7 @@ import { DocumentViewer } from '@awesome-cordova-plugins/document-viewer/ngx';
 })
 export class AyuntamientoInfoPage implements OnInit {
 
-  constructor(private route: Router, private document: DocumentViewer) { }
+  constructor(private route: Router, /*private document: DocumentViewer*/) { }
   
    /*options: DocumentViewerOptions = {
     title: 'Cuento'

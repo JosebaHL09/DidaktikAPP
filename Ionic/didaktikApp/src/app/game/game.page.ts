@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 import { Router } from '@angular/router';
-import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationEvents, BackgroundGeolocationResponse } from '@awesome-cordova-plugins/background-geolocation/ngx';
 import { GuneaService } from '../services/gunea.service';
 import { Gunea } from '../interfaces/gunea';
 import { ToastController } from '@ionic/angular';
