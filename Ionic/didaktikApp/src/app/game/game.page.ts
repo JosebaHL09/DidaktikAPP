@@ -48,8 +48,9 @@ export class GamePage implements OnInit {
       id: 3,
       lati: 43.331710,
       long: -3.034654,
-
-      title: 'Calle Itsasalde'
+      title: 'Calle Itsasalde',
+      url: '/calle-info',
+      img: '../../assets/img/calle.jpg'
     },
     {
       id: 4,
@@ -57,7 +58,7 @@ export class GamePage implements OnInit {
       long: -3.031600,
       title: 'Club de remo la Sotera',
       url: '/remo-info',
-      img: '../../assets/img/remo.jpg'
+      img: '../../assets/img/club.jpg'
     },
     {
       id: 5,
