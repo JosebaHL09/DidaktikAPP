@@ -47,7 +47,7 @@ export class CastilloInfoPage implements OnInit {
   }
   playGame() {
     this.stopAudio()
-    this.route.navigate(['/nombredeljuego']);
+    this.route.navigate(['/castillo-juego']);
   }
   goMap() {
     this.stopAudio()

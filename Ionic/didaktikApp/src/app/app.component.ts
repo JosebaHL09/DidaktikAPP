@@ -13,7 +13,7 @@ export class AppComponent {
     { title: 'Castillo', url: '/castillo-info', icon: 'heart' },
     { title: 'Mural', url: '/mural-info', icon: 'archive' },
     { title: 'Estatua', url: '/estatua-info', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+    { title: 'Juego-castillo', url: '/castillo-juego', icon: 'game-controller' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 

@@ -5,5 +5,65 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>¿A que imagen corresponde el texto?</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row id="img">
+          <ion-col>
+            <ion-img src="../../assets/img/castillo_1.jpg"></ion-img>
+          </ion-col>
+          <ion-col>
+            <ion-img src="../../assets/img/castillo_2.jpg"></ion-img>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-slides fullscreen scroll-y="false">
+            <ion-slide>
+              <ion-col>
+                <p>Por desgracia, los fuertes del Serantes y sus agujeros se sitúan hoy en día al lado de una antena de
+                  televisión. De hecho, comparten paisaje con autopistas, superpuertos y muchas otras huellas de
+                  nuestras
+                  civilizaciones modernas.</p>
+                <ion-radio-group value="imagen1" id="imagen1" [(ngModel)]="aukeratutakoerantzuna1 ">
+                  <ion-item>
+                    <ion-label>Imagen 1</ion-label>
+                    <ion-radio slot="start" value="2"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Imagen 2</ion-label>
+                    <ion-radio slot="start" value="1" class="correct"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-col>
+            </ion-slide>
+            <ion-slide>
+              <ion-col>
+                <p>Hacia el siglo XIX, se construyó en el Serantes un fuerte militar completo con el objetivo de
+                  defender
+                  el
+                  puerto de la ciudad, así como el río Nervión. Además, los fuertes del Serantes estaban compuestos,
+                  entre
+                  otras cosas, por ocho cuevas y cuatro agujeros.</p>
+                <ion-radio-group value="imagen2" id="imagen2" [(ngModel)]="aukeratutakoerantzuna2">
+                  <ion-item>
+                    <ion-label>Imagen 1</ion-label>
+                    <ion-radio slot="start" value="1" class="correct"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Imagen 2</ion-label>
+                    <ion-radio slot="start" value="2"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-col>
+            </ion-slide>
+          </ion-slides>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+    <ion-button color="success" (click)="check()">
+      <ion-icon name="checkmark-outline"></ion-icon></ion-button>
+  </ion-card>
 </ion-content>
