@@ -165,7 +165,8 @@ export class GamePage implements OnInit {
 
       //marcador de posicion del usuario
       this.locateUser(myLatLng)
-      this.addMarker(this.marker);
+      this.addMarker();
+
       /*google.maps.event.addListener(this.map, 'click', () => {
         this.updateMarker()
       });
@@ -177,7 +178,7 @@ export class GamePage implements OnInit {
   }
 
 
-  addMarker(marker1) {
+  addMarker() {
     var infowindow, id;
     for (let marker of this.markers) {
       let content =
@@ -215,8 +216,8 @@ export class GamePage implements OnInit {
     }
     google.maps.event.addListener(infowindow, 'domready', () => {
       var button = document.getElementById('boton');
-      var distance = this.getDistance(infowindow, marker1)
-      console.log(distance)
+      var distance = this.getDistance(infowindow)
+      console.log('distance: ' + distance)
       if (distance <= 100) {
         button.addEventListener('click', () => {
           this.route.navigate(['/' + this.getUrl(id)]);
@@ -225,16 +226,14 @@ export class GamePage implements OnInit {
     });
 
   }
-
-
-
-  getDistance(p1, p2) {
+  getDistance(p2) {
+    this.updateMarker()
+    var p1 = this.marker
     var R = 6371000
     var rlat1 = p1.position.lat() * (Math.PI / 180); // Convert degrees to radians
     var rlat2 = p2.position.lat() * (Math.PI / 180); // Convert degrees to radians
     var difflat = rlat2 - rlat1; // Radian difference (latitudes)
     var difflon = (p2.position.lng() - p1.position.lng()) * (Math.PI / 180);
-
     var d = 2 * R * Math.atan(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
     return d;
   }
@@ -252,7 +251,6 @@ export class GamePage implements OnInit {
 
   locateUser(myLatLng) {
     this.marker = new google.maps.Marker({
-
       icon: {
         path: google.maps.SymbolPath.CIRCLE,
         scale: 10,
@@ -291,6 +289,7 @@ export class GamePage implements OnInit {
       console.log('data', data)
     });
   }
+
 }
 
 

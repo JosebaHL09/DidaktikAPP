@@ -48,6 +48,10 @@ const routes: Routes = [
   },  {
     path: 'remo-info',
     loadChildren: () => import('./remo-info/remo-info.module').then( m => m.RemoInfoPageModule)
+  },
+  {
+    path: 'castillo-juego',
+    loadChildren: () => import('./castillo-juego/castillo-juego.module').then( m => m.CastilloJuegoPageModule)
   }
 
 
