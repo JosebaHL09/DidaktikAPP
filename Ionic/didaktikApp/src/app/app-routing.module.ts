@@ -52,6 +52,10 @@ const routes: Routes = [
   {
     path: 'castillo-juego',
     loadChildren: () => import('./castillo-juego/castillo-juego.module').then( m => m.CastilloJuegoPageModule)
+  },
+  {
+    path: 'remo-juego',
+    loadChildren: () => import('./remo-juego/remo-juego.module').then( m => m.RemoJuegoPageModule)
   }
 
 

@@ -43,7 +43,7 @@ export class RemoInfoPage implements OnInit {
 
   playGame() {
     this.stopAudio()
-    this.route.navigate(['/nombredeljuego']);
+    this.route.navigate(['/remo-juego']);
   }
   goMap() {
     this.stopAudio()
@@ -51,7 +51,6 @@ export class RemoInfoPage implements OnInit {
   }
   openNav() {
     document.getElementById("overlay").classList.add('overlayshow');
-    (document.getElementById("closebtn") as HTMLInputElement).disabled = true;
   }
   closeNav() {
     document.getElementById("overlay").classList.remove('overlayshow');

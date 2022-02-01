@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>DidaktikApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card >
+    <ion-card-content >
+    <ion-card-header>
+      <ion-card-title>¿Os ha gustado la actividad?</ion-card-title>
+    </ion-card-header>
+  </ion-card-content>
+</ion-card>
+      <button (click)="goMap()" expand="block" id="Sibtn" color="primary">
+        <div id="icon">
+          <ion-icon name="thumbs-up-outline"></ion-icon>
+        </div>
+        <div id="letra">
+          <h5>Si, me ha gustado</h5>
+        </div>
+      </button>
+      <button (click)="goMap()" expand="block" id="Nobtn" color="primary">
+        <div id="icon">
+          <ion-icon name="thumbs-down-outline"></ion-icon>
+        </div>
+        <div id="letra">
+          <h5>No, no me ha gustado</h5>
+        </div>
+      </button>
+</ion-content>
