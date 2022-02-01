@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-castillo-juego',
   templateUrl: './castillo-juego.page.html',
@@ -9,7 +9,7 @@ import { AlertController } from '@ionic/angular';
 export class CastilloJuegoPage implements OnInit {
   public aukeratutakoerantzuna1
   public aukeratutakoerantzuna2
-  constructor(public alertController: AlertController) { }
+  constructor(public alertController: AlertController,private route:Router) { }
 
   ngOnInit() {
 
@@ -27,7 +27,15 @@ export class CastilloJuegoPage implements OnInit {
       cssClass: 'successalert',
       header: 'Correcto',
       message: "<img src='../../assets/img/success.png'>",
-      buttons: ['OK']
+      buttons: [
+        {
+          text: 'OK',
+          role: 'bai',
+          handler: () => {
+            this.goMap();
+          }
+        },
+      ]
     });
     await alert.present();
   }
@@ -39,5 +47,9 @@ export class CastilloJuegoPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
+  }
+
+  goMap() {
+    this.route.navigate(['/game']);
   }
 }
