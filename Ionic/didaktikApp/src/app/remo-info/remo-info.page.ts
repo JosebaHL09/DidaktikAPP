@@ -20,6 +20,7 @@ export class RemoInfoPage implements OnInit {
     },
     onload: function () {
       document.getElementById("overlay").classList.add('overlayshow');
+      (document.getElementById('btn') as HTMLInputElement).disabled = true;
     }
   });
   constructor(private route: Router, private menu: MenuController, private platform: Platform) {
@@ -39,6 +40,10 @@ export class RemoInfoPage implements OnInit {
   }
   stopAudio(){
     this.sound.stop();
+  }
+  replayAudio() {
+    this.stopAudio();
+    this.playAudio();
   }
 
   playGame() {
