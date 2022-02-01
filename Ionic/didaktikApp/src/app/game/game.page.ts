@@ -80,6 +80,7 @@ export class GamePage implements OnInit {
   lati;
   long;
   marker
+  distance
   locationWatchStarted: boolean;
   locationSubscription: any;
 
@@ -216,9 +217,9 @@ export class GamePage implements OnInit {
     }
     google.maps.event.addListener(infowindow, 'domready', () => {
       var button = document.getElementById('boton');
-      var distance = this.getDistance(infowindow)
-      console.log('distance: ' + distance)
-      if (distance <= 100) {
+      this.distance = this.getDistance(infowindow)
+      console.log('distance: ' + this.distance)
+      if (this.distance >= 0) {
         button.addEventListener('click', () => {
           this.route.navigate(['/' + this.getUrl(id)]);
         });
@@ -226,14 +227,14 @@ export class GamePage implements OnInit {
     });
 
   }
-  getDistance(p2) {
-    this.updateMarker()
-    var p1 = this.marker
+  getDistance(infowindow) {
+    //console.log(this.marker.coords.latitude)
+    //console.log(this.marker.coords.longitude)
     var R = 6371000
-    var rlat1 = p1.position.lat() * (Math.PI / 180); // Convert degrees to radians
-    var rlat2 = p2.position.lat() * (Math.PI / 180); // Convert degrees to radians
+    var rlat1 = this.marker.position.lat() * (Math.PI / 180); // Convert degrees to radians
+    var rlat2 = infowindow.position.lat() * (Math.PI / 180); // Convert degrees to radians
     var difflat = rlat2 - rlat1; // Radian difference (latitudes)
-    var difflon = (p2.position.lng() - p1.position.lng()) * (Math.PI / 180);
+    var difflon = (infowindow.position.lng() - this.marker.position.lng()) * (Math.PI / 180);
     var d = 2 * R * Math.atan(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
     return d;
   }
@@ -261,6 +262,7 @@ export class GamePage implements OnInit {
       }
     });
     this.marker.setPosition(myLatLng)
+    console.log(this.lati)
     var circle = new google.maps.Circle({
       center: myLatLng,
       radius: 50,
@@ -286,10 +288,12 @@ export class GamePage implements OnInit {
       this.marker.setPosition(myLatLng)
       this.marker.setMap(this.map)
       this.map.panTo(myLatLng)
+      console.log("marker")
+      console.log(this.lati)
+      console.log(this.marker.coords.longitude)
       console.log('data', data)
     });
   }
-
 }
 
 

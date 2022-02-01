@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>DidaktikApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Selecciona la imagen en la que aparecen las sardinas.</ion-card-title>
+    </ion-card-header>
+    <ion-grid>
+      <ion-item *ngFor="let pez of peces ; let i=index">
+        <ion-img [src]="pez" [id]="i" (click)="elegir(i)"></ion-img>
+      </ion-item>
+    </ion-grid>
+  </ion-card>
+</ion-content>

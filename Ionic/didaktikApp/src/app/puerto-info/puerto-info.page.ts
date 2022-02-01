@@ -4,9 +4,6 @@ import { MenuController } from '@ionic/angular'
 import { Howl } from 'howler';
 import { Platform } from '@ionic/angular';
 
-
-
-
 @Component({
   selector: 'app-puerto-info',
   templateUrl: './puerto-info.page.html',
@@ -44,7 +41,7 @@ export class PuertoInfoPage implements OnInit {
 
   playGame() {
     this.stopAudio()
-    this.route.navigate(['/nombredeljuego']);
+    this.route.navigate(['/puerto-juego']);
   }
   goMap() {
     this.stopAudio()

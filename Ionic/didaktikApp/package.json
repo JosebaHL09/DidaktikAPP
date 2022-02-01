@@ -19,13 +19,13 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
-
     "@awesome-cordova-plugins/document-viewer": "^5.38.0",
-
     "@awesome-cordova-plugins/geolocation": "^5.37.3",
     "@awesome-cordova-plugins/native-audio": "^5.37.3",
     "@capacitor/core": "3.3.4",
     "@capacitor/network": "^1.0.7",
+    "@capacitor/share": "^1.1.1",
+    "@capacitor/storage": "^1.2.4",
     "@ionic-native/geolocation": "^5.36.0",
     "@ionic-native/native-audio": "^5.36.0",
     "@ionic/angular": "^6.0.0",

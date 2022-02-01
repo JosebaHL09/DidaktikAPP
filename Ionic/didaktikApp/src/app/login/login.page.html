@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      USUARIO
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="medio">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="center">NOMBRE*</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input placeholder="Introduce aqui tu nombre" [(ngModel)]="userNombre"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="boton">
+          <ion-button expand="full" color="success" (click)="clickBoton()">EMPEZAR</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

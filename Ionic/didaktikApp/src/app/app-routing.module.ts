@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'intro',
     pathMatch: 'full'
   },
   {
@@ -45,7 +45,8 @@ const routes: Routes = [
     path: 'estatua-info',
     loadChildren: () => import('./estatua-info/estatua-info.module').then( m => m.EstatuaInfoPageModule)
 
-  },  {
+  },
+  {
     path: 'remo-info',
     loadChildren: () => import('./remo-info/remo-info.module').then( m => m.RemoInfoPageModule)
   },
@@ -56,7 +57,20 @@ const routes: Routes = [
   {
     path: 'remo-juego',
     loadChildren: () => import('./remo-juego/remo-juego.module').then( m => m.RemoJuegoPageModule)
+  },
+  {
+    path: 'intro',
+    loadChildren: () => import('./intro/intro.module').then( m => m.IntroPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'puerto-juego',
+    loadChildren: () => import('./puerto-juego/puerto-juego.module').then( m => m.PuertoJuegoPageModule)
   }
+
 
 
 ];
