@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card id="juego" [hidden] = hidden>
     <ion-card-header>
       <ion-card-subtitle>¿A que imagen corresponde el texto?</ion-card-subtitle>
     </ion-card-header>
@@ -63,7 +63,48 @@
         </ion-row>
       </ion-grid>
     </ion-card-content>
-    <ion-button color="success" (click)="check()">
-      <ion-icon name="checkmark-outline"></ion-icon></ion-button>
   </ion-card>
+
+  <ion-card id="paisaje" [hidden] = !hidden>
+    <ion-card-header>
+      <ion-title>Contaminación Visual</ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div [ngClass]="{'col':toggle1}" (click)="toggleShow(1)">
+              <ion-img src="../../assets/img/paisaje_1.jpg"></ion-img>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div [ngClass]="{'col':toggle2}" (click)="toggleShow(2)">
+              <ion-img src="../../assets/img/paisaje_2.jpg"></ion-img>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div [ngClass]="{'col':toggle3}" (click)="toggleShow(3)">
+              <ion-img src="../../assets/img/paisaje_3.jpg"></ion-img>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div [ngClass]="{'col':toggle4}" (click)="toggleShow(4)">
+              <ion-img src="../../assets/img/paisaje_4.jpg"></ion-img>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <b>Estás viendo las vistas desde el Serantes ahora mismo. ¿Qué elementos crees que estropean el paisaje?</b>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-button color="success" (click)="check()">
+    <ion-icon name="checkmark-outline"></ion-icon>
+  </ion-button>
+
 </ion-content>

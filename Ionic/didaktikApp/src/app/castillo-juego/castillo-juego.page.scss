@@ -5,8 +5,8 @@ ion-img{
     height: 91%;
     width:auto
 }
-ion-card{
-    height: 90%;
+#juego{
+    height: 75%;
 }
 ion-slides {
     height: 100%;
@@ -22,5 +22,18 @@ ion-button{
 .successalert{
     display: flex;
     justify-content: center;
+}
+
+#paisaje{
+    height: 60%;
+}
+#paisaje ion-img{
+    height: 100%;
+    width: auto;
+}
+
+.col{
+    border: 2px solid #2DD36F;
+    border-radius: 2px;
 }
 

@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-folder',
   templateUrl: './folder.page.html',
@@ -16,6 +17,7 @@ export class FolderPage implements OnInit {
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+    this.menu.enable(true)
   }
   async showAlert() {
     const alert = await this.alertCtrl.create({

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 @Component({
@@ -9,18 +9,57 @@ import { Router } from '@angular/router';
 export class CastilloJuegoPage implements OnInit {
   public aukeratutakoerantzuna1
   public aukeratutakoerantzuna2
-  constructor(public alertController: AlertController,private route:Router) { }
+  constructor(public alertController: AlertController, private route: Router) { }
+
+  hidden
+  toggle1: boolean;
+  toggle2: boolean;
+  toggle3: boolean;
+  toggle4: boolean;
 
   ngOnInit() {
-
+    this.hidden = false
+    this.toggle1 = false
+    this.toggle2 = false
+    this.toggle3 = false
+    this.toggle4 = false
+  }
+  ngOnDestroy() {
+    this.hidden = false
+    this.toggle1 = false
+    this.toggle2 = false
+    this.toggle3 = false
+    this.toggle4 = false
+  }
+  toggleShow(id) {
+    switch (id) {
+      case 1:
+        this.toggle1 = !this.toggle1;
+        break;
+      case 2:
+        this.toggle2 = !this.toggle2;
+        break;
+      case 3:
+        this.toggle3 = !this.toggle3;
+        break;
+      case 4:
+        this.toggle4 = !this.toggle4;
+        break
+    }
+    //this.toggle = !this.toggle;
   }
 
   check() {
-    if (this.aukeratutakoerantzuna1 == 1 && this.aukeratutakoerantzuna2 == 1) {
-      this.correct()
-    }else{
-      this.incorrect()
+    if (this.hidden == false) {
+      if (this.aukeratutakoerantzuna1 == 1 && this.aukeratutakoerantzuna2 == 1) {
+        this.correct()
+      } else {
+        this.incorrect()
+      }
+    } else {
+      this.goMap()
     }
+
   }
   async correct() {
     const alert = await this.alertController.create({
@@ -32,7 +71,7 @@ export class CastilloJuegoPage implements OnInit {
           text: 'OK',
           role: 'bai',
           handler: () => {
-            this.goMap();
+            this.hidden = !this.hidden
           }
         },
       ]
@@ -49,7 +88,13 @@ export class CastilloJuegoPage implements OnInit {
     await alert.present();
   }
 
+  cambiarFondo() {
+
+  }
+
   goMap() {
-    this.route.navigate(['/game']);
+    this.route.navigateByUrl('/game', {
+      replaceUrl: true
+    });
   }
 }
