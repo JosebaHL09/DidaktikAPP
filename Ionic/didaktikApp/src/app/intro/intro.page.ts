@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular'
 
 @Component({
   selector: 'app-intro',
@@ -10,7 +11,7 @@ export class IntroPage implements OnInit {
 
   img:string;
 
-  constructor(public router:Router) { 
+  constructor(public router:Router, private menu: MenuController) { 
     setTimeout(()=>{
       this.router.navigateByUrl('login');
     },2000);
@@ -18,6 +19,7 @@ export class IntroPage implements OnInit {
 
   ngOnInit() {
     this.img ='../../assets/img/imgintro.png';
+    this.menu.enable(false);
   }
 
   ngOnDestroy(){

@@ -4,6 +4,7 @@ import { LoadingController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import { NavigationExtras, Router } from '@angular/router';
 import { Storage } from '@capacitor/storage';
+import { MenuController } from '@ionic/angular'
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginPage  {
 
   userNombre;
 
-  constructor(public toastController: ToastController, public loadingController: LoadingController, public router: Router, private routerOutlet: IonRouterOutlet) { }
+  constructor(public toastController: ToastController, public loadingController: LoadingController, public router: Router, private routerOutlet: IonRouterOutlet, private menu: MenuController) { }
 
   async setName(x: string) {
     await Storage.set({
@@ -94,5 +95,6 @@ export class LoginPage  {
   }
   ngOnInit(): void {
     this.routerOutlet.swipeGesture = false;
+    this.menu.enable(false);
   }
 }
