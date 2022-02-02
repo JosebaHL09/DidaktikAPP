@@ -11,7 +11,6 @@ import { Platform } from '@ionic/angular';
 })
 export class RemoInfoPage implements OnInit {
   showVar
-  disable
   sound = new Howl({
     src: ['../assets/audio/Sotera.mp3'],
     volume: 0.15,
@@ -19,6 +18,7 @@ export class RemoInfoPage implements OnInit {
       (document.getElementById('btn') as HTMLInputElement).disabled = false;
     },
     onload: function () {
+      (document.getElementById('btn') as HTMLInputElement).disabled = true;
       document.getElementById("overlay").classList.add('overlayshow');
     }
   });
@@ -30,10 +30,6 @@ export class RemoInfoPage implements OnInit {
   ngOnInit() {
     this.menu.enable(false);
   }
-  disableBtn() {
-    this.disable = !this.disable;
-  }
-
   playAudio() {
     this.sound.play();
   }

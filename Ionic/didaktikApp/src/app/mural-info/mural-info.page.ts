@@ -9,10 +9,12 @@ import { MenuController } from '@ionic/angular'
   styleUrls: ['./mural-info.page.scss'],
 })
 export class MuralInfoPage implements OnInit {
-  disable
   sound = new Howl({
     src: ['../assets/audio/Eskorbuto.mp3'],
     volume: 0.15,
+    onplay: function () {
+      (document.getElementById('btn') as HTMLInputElement).disabled = true;
+    },
     onend: function () {
       (document.getElementById('btn') as HTMLInputElement).disabled = false;
     }
@@ -43,9 +45,6 @@ export class MuralInfoPage implements OnInit {
   }
   stopAudio() {
     this.sound.stop();
-  }
-  disableBtn() {
-    this.disable = !this.disable;
   }
 
 }

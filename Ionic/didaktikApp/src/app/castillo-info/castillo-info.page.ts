@@ -12,12 +12,14 @@ import { Platform } from '@ionic/angular';
 })
 export class CastilloInfoPage implements OnInit {
   showVar
-  disable
   sound = new Howl({
     src: ['../assets/audio/Leyendas.mp3'],
+    onplay:function () {
+      (document.getElementById('btn') as HTMLInputElement).disabled = true;
+    },
     onend: function () {
-      document.getElementById("overlay").classList.add('overlayshow');
       (document.getElementById('btn') as HTMLInputElement).disabled = false;
+      document.getElementById("overlay").classList.add('overlayshow');
     }
   });
   constructor(private route: Router, private menu: MenuController, private platform: Platform) {
@@ -25,15 +27,11 @@ export class CastilloInfoPage implements OnInit {
       this.stopAudio()
     });
   }
-
-  ngOnInit() {
+  ngOnInit() { 
     this.playAudio();
     this.menu.enable(false);
   }
 
-  disableBtn() {
-    this.disable = !this.disable;
-  }
   playAudio() {
     this.sound.play();
   }
@@ -52,7 +50,6 @@ export class CastilloInfoPage implements OnInit {
   goMap() {
     this.stopAudio()
     this.route.navigate(['/game']);
-    this.disableBtn()
   }
   openNav() {
     document.getElementById("overlay").classList.add('overlayshow');

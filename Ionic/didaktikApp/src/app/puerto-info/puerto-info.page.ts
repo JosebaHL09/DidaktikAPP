@@ -11,10 +11,13 @@ import { Platform } from '@ionic/angular';
 })
 export class PuertoInfoPage implements OnInit {
   showVar
-  disable
+
   sound = new Howl({
     src: ['../assets/audio/Las_Sardinas.mp3'],
     volume: 0.80,
+    onplay: function () {
+      (document.getElementById('btn') as HTMLInputElement).disabled = true;
+    },
     onend: function () {
       (document.getElementById('btn') as HTMLInputElement).disabled = false;
     }
@@ -28,14 +31,12 @@ export class PuertoInfoPage implements OnInit {
     this.playAudio();
     this.menu.enable(false);
   }
-  disableBtn() {
-    this.disable = !this.disable;
-  }
+
 
   playAudio() {
     this.sound.play();
   }
-  stopAudio(){
+  stopAudio() {
     this.sound.stop();
   }
 
