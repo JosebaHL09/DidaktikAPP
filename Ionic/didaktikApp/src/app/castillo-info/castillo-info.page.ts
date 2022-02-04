@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular'
 import { Howl } from 'howler';
 import { Platform } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class CastilloInfoPage implements OnInit {
       document.getElementById("overlay").classList.add('overlayshow');
     }
   });
-  constructor(private route: Router, private menu: MenuController, private platform: Platform) {
+  constructor(private route: Router, private menu: MenuController, private platform: Platform, public alertController: AlertController) {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.stopAudio()
     });
@@ -60,5 +61,52 @@ export class CastilloInfoPage implements OnInit {
 
   changeSrc() {
     this.showVar = !this.showVar;
+  }
+  async salir() {
+    const alert = await this.alertController.create({
+      cssClass: 'successalert',
+      header: 'Aviso',
+      message: "<img id='alerta'src='../../assets/img/alerta.png'>¿Seguro que quieres salir?",
+      buttons: [
+        {
+          text: 'SI',
+          role: 'bai',
+          handler: () => {
+            this.goMap();
+          }
+        },
+        {
+          text: 'NO',
+          role: 'bai',
+          handler: () => {
+            
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  async jugar() {
+    const alert = await this.alertController.create({
+      cssClass: 'successalert',
+      header: 'Aviso',
+      message: "<img id='alerta'src='../../assets/img/alerta.png'>¿Seguro que quieres ir al juego?",
+      buttons: [
+        {
+          text: 'SI',
+          role: 'bai',
+          handler: () => {
+            this.playGame();
+          }
+        },
+        {
+          text: 'NO',
+          role: 'bai',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 }

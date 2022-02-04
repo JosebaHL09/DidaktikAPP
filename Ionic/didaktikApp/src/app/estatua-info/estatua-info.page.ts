@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Howl } from 'howler';
 import { MenuController } from '@ionic/angular'
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { MenuController } from '@ionic/angular'
 })
 export class EstatuaInfoPage implements OnInit {
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, public alertController: AlertController) { }
 
   ngOnInit() {
     this.playAudio1();
@@ -23,11 +24,9 @@ export class EstatuaInfoPage implements OnInit {
     volume: 0.15,
     onplay: function () {
       (document.getElementById('replay') as HTMLInputElement).disabled = true;
-      (document.getElementById('cancion') as HTMLInputElement).disabled = true;
 
     },
     onend: function () {
-      (document.getElementById('btn') as HTMLInputElement).disabled = false;
       (document.getElementById('replay') as HTMLInputElement).disabled = false;
       (document.getElementById('cancion') as HTMLInputElement).disabled = false;
     }
@@ -114,8 +113,53 @@ export class EstatuaInfoPage implements OnInit {
     this.route.navigate(['/game']);
   }
 
-  disableBtn() {
-    this.disable = !this.disable;
+  async salir() {
+    const alert = await this.alertController.create({
+      cssClass: 'successalert',
+      header: 'Aviso',
+      message: "<img id='alerta'src='../../assets/img/alerta.png'>¿Seguro que quieres salir?",
+      buttons: [
+        {
+          text: 'SI',
+          role: 'bai',
+          handler: () => {
+            this.goMap();
+          }
+        },
+        {
+          text: 'NO',
+          role: 'bai',
+          handler: () => {
+            
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  async jugar() {
+    const alert = await this.alertController.create({
+      cssClass: 'successalert',
+      header: 'Aviso',
+      message: "<img id='alerta'src='../../assets/img/alerta.png'>¿Quieres salar el audio y escuchar la cancion?",
+      buttons: [
+        {
+          text: 'SI',
+          role: 'bai',
+          handler: () => {
+            this.sound1.stop();
+            this.playAudio2();
+          }
+        },
+        {
+          text: 'NO',
+          role: 'bai',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }

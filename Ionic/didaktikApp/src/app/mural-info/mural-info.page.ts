@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Howl } from 'howler';
 import { MenuController } from '@ionic/angular'
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-mural-info',
@@ -20,7 +21,7 @@ export class MuralInfoPage implements OnInit {
     }
   });
 
-  constructor(private route: Router, private menu: MenuController) { }
+  constructor(private route: Router, private menu: MenuController,public alertController: AlertController) { }
 
   ngOnInit() {
     this.playAudio()
@@ -33,6 +34,7 @@ export class MuralInfoPage implements OnInit {
       "<b>Pako Galán</b> : Él fue el tercer fundador junto con Juanma y Iosu. Tocaba el tambor en la banda y poco después fue sustituído por Gugu, otro artista. Se muestra misterioso, ya que no podemos ver su cara entera.";
   }
   goMap() {
+    this.stopAudio();
     this.route.navigate(['/game']);
   }
   replay() {
@@ -45,6 +47,53 @@ export class MuralInfoPage implements OnInit {
   }
   stopAudio() {
     this.sound.stop();
+  }
+  async salir() {
+    const alert = await this.alertController.create({
+      cssClass: 'successalert',
+      header: 'Aviso',
+      message: "<img id='alerta'src='../../assets/img/alerta.png'>¿Seguro que quieres salir?",
+      buttons: [
+        {
+          text: 'SI',
+          role: 'bai',
+          handler: () => {
+            this.goMap();
+          }
+        },
+        {
+          text: 'NO',
+          role: 'bai',
+          handler: () => {
+            
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  async jugar() {
+    const alert = await this.alertController.create({
+      cssClass: 'successalert',
+      header: 'Aviso',
+      message: "<img id='alerta'src='../../assets/img/alerta.png'>¿Seguro que quieres ir a la informacion?",
+      buttons: [
+        {
+          text: 'SI',
+          role: 'bai',
+          handler: () => {
+            this.showInfo();
+          }
+        },
+        {
+          text: 'NO',
+          role: 'bai',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }

@@ -16,17 +16,17 @@
 
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button color="light" [disabled]="!disableBtn()" id="btn">
+    <ion-fab-button color="light" id="btn">
       <ion-icon md="chevron-back-circle-outline" ios="chevron-back-circle-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="start">
-      <ion-fab-button color="light" id="cancion" (click)="playAudio2()">
+      <ion-fab-button color="light" id="cancion" (click)="jugar()">
         <ion-icon name="musical-notes-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-button color="light" id="replay" (click)="playAudio1()">
         <ion-icon name="reload-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="light" (click)="goMap()">
+      <ion-fab-button color="light" (click)="salir()">
         <ion-icon name="exit-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>

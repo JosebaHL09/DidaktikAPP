@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 //import { DocumentViewer } from '@awesome-cordova-plugins/document-viewer/ngx';
-
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-ayuntamiento-info',
   templateUrl: './ayuntamiento-info.page.html',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AyuntamientoInfoPage implements OnInit {
 
-  constructor(private route: Router, /*private document: DocumentViewer*/) { }
+  constructor(private route: Router,public alertController: AlertController /*private document: DocumentViewer*/) { }
   
    /*options: DocumentViewerOptions = {
     title: 'Cuento'
@@ -23,5 +23,28 @@ export class AyuntamientoInfoPage implements OnInit {
   verLibro(){
     //this.document.viewDocument('../assets/cuento.pdf', 'application/pdf', options)
   }
- 
+  async salir() {
+    const alert = await this.alertController.create({
+      cssClass: 'successalert',
+      header: 'Aviso',
+      message: "<img id='alerta'src='../../assets/img/alerta.png'>¿Seguro que quieres salir?",
+      buttons: [
+        {
+          text: 'SI',
+          role: 'bai',
+          handler: () => {
+            this.goMap();
+          }
+        },
+        {
+          text: 'NO',
+          role: 'bai',
+          handler: () => {
+            
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 }
