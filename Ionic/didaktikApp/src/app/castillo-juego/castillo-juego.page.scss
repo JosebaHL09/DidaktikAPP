@@ -1,6 +1,9 @@
 #img{
     margin-bottom: 5%;
 }
+ion-content {
+    --background: url('../../assets/img/fondo1.jpg') 0 0/100% 100% no-repeat;
+  }
 ion-img{
     height: 91%;
     width:auto
