@@ -4,21 +4,38 @@ import { LoadingController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import { NavigationExtras, Router } from '@angular/router';
 import { Storage } from '@capacitor/storage';
-import { MenuController } from '@ionic/angular'
+import * as $ from "jquery";
+import { MenuController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage  {
+export class LoginPage {
+
   user = {
     nombre: 'Peter'
   };
 
   userNombre;
+  i = 0;
 
-  constructor(public toastController: ToastController, public loadingController: LoadingController, public router: Router, private routerOutlet: IonRouterOutlet, private menu: MenuController) { }
+  constructor(public toastController: ToastController, public loadingController: LoadingController, public router: Router, private routerOutlet: IonRouterOutlet, private route: Router, private menu: MenuController) { }
+
+  ngOnInit(): void {
+    this.menu.enable(false)
+    this.routerOutlet.swipeGesture = false;
+
+    $("#3").css("display", "none");
+    $("#4").css("display", "none");
+    $("#5").css("display", "none");
+    $("#6").css("display", "none");
+    $(".boton").css("display", "none");
+
+
+  }
 
   async setName(x: string) {
     await Storage.set({
@@ -26,15 +43,6 @@ export class LoginPage  {
       value: x,
     });
   };
-
-  async shared() {
-    await Share.share({
-      title: 'Joseba sapo',
-      text: 'Hasbula canijo',
-      url: 'http://ionicframework.com/',
-      dialogTitle: 'Share with buddies',
-    });
-  }
 
   async openToast() {
     const toast = await this.toastController.create({
@@ -52,7 +60,9 @@ export class LoginPage  {
       this.presentLoading();
       setTimeout(() => {
         this.abrirMenu();
+        this.route.navigate(['/home']);
       }, 2000);
+
     }
   }
   async abrirMenu() {
@@ -64,7 +74,7 @@ export class LoginPage  {
         user: this.user
       }
     }
-    this.router.navigateByUrl('home', navigationExtras);
+    this.router.navigateByUrl('menu', navigationExtras);
   }
 
   async presentLoading() {
@@ -93,8 +103,49 @@ export class LoginPage  {
     const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed with role:', role);
   }
-  ngOnInit(): void {
-    this.routerOutlet.swipeGesture = false;
-    this.menu.enable(false);
+  async shared() {
+    await Share.share({
+      title: 'Cuestionario Previo',
+      text: $("#value1").val() + "<br/>" + $("#value2").val() + "<br/>" + $("#value3").val() + " ",
+      url: 'https://www.uni.eus/es/',
+      dialogTitle: 'Compartelo con tus amigos',
+    });
   }
+
+
+  async sig() {
+    this.i = this.i + 1;
+
+    if (this.i == 1) {
+
+      $("#3").css("display", "block");
+      $("#4").css("display", "block");
+
+      $("#1").css("display", "none");
+      $("#2").css("display", "none");
+
+    }
+    if (this.i == 2) {
+
+      $("#5").css("display", "block");
+      $("#6").css("display", "block");
+
+      $("#3").css("display", "none");
+      $("#4").css("display", "none");
+
+      $("#boton").text("Finalizar");
+
+    }
+
+    if (this.i == 3) {
+      this.shared();
+      $(".boton").css("display", "block");
+      $("#boton").css("display", "none");
+      $("#5").css("display", "none");
+      $("#6").css("display", "none");
+
+    }
+  }
+
+
 }

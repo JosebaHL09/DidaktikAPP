@@ -2,12 +2,10 @@ ion-menu-button {
   color: var(--ion-color-primary);
 }
 ion-content {
-  --background: url('../../assets/img/fondo.jpg')  no-repeat;
+  --background: url('../../assets/img/fondo1.jpg') 0 0/100% 100% no-repeat;
 }
 
   
-
-
 #container {
   text-align: center;
   position: absolute;
@@ -41,25 +39,28 @@ ion-img{
 
 
 #btn{
+  display: flex;
+  align-items:center;
   width: 80%;
   height:5rem;
   border-radius: 50px;
-  background-color: #F23333;
+  background-color: #AC3DFE;
   border: 2px solid black;
+  margin-right: auto;
+  margin-left: auto;
 }
 #icon{
   padding: 10px;
-  float: left;
   font-size: 25px;
   border-radius: 50px;
+  border: 1px solid black;
   margin-left: 2%;
-  background-color: #CFA892;
+  background-color: #F7BAFE;
 }
 #text{
   font-family: "Luckiest Guy";
   margin-left: 5%;
-  margin-top: -2%;
-  float: left;
+  margin-top: -4%;
 }
 
 #logo{
