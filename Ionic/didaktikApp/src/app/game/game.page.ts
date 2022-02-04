@@ -279,7 +279,7 @@ export class GamePage implements OnInit {
 
   updateMarker() {
     let watch = this.geolocation.watchPosition();
-    watch.subscribe(async (data: Geoposition) => {
+    let subscription = watch.subscribe(async (data: Geoposition) => {
       console.log(data.coords.latitude)
       console.log(data.coords.longitude)
       this.lati = data.coords.latitude
@@ -292,7 +292,10 @@ export class GamePage implements OnInit {
       console.log(this.lati)
       console.log(this.marker.coords.longitude)
       console.log('data', data)
+      subscription.unsubscribe()
     });
+
+    
   }
 }
 
