@@ -1,3 +1,16 @@
 ion-content {
     --background: url('../../assets/img/fondo1.jpg') 0 0/100% 100% no-repeat;
-  }
+}
+
+ion-slides {
+  --bullet-background: black;
+  height: 100%;
+}
+ion-card{
+  margin-bottom: auto;
+}
+
+.texto{
+  margin-top: 5%;
+  text-align: left;
+}

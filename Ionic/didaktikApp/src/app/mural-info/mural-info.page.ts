@@ -12,12 +12,11 @@ import { AlertController } from '@ionic/angular';
 export class MuralInfoPage implements OnInit {
   sound = new Howl({
     src: ['../assets/audio/Eskorbuto.mp3'],
-    volume: 0.15,
     onplay: function () {
-      (document.getElementById('btn') as HTMLInputElement).disabled = true;
+
     },
     onend: function () {
-      (document.getElementById('btn') as HTMLInputElement).disabled = false;
+    
     }
   });
 

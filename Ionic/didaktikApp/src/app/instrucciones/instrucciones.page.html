@@ -8,20 +8,54 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col *ngFor="let gunea of guneak">
-        <ion-item-divider color="light">
-          <ion-row>
-            <h1>{{gunea.izena}}</h1>
-            <h1>{{gunea.latitud}}</h1>
-            <h1>{{gunea.longitud}}</h1>
-            <h1>{{gunea.irudia}}</h1>
-            <h1>{{gunea.url}}</h1>
-          </ion-row>
-        </ion-item-divider>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-slides pager="true">
+    <ion-slide>
+      <ion-card>
+        <img src="../../assets/img/imgintro.png" alt="">
+        <ion-card-content>
+          <h1>Bienvenido a, Didaktikapp Santurtzi</h1>
+          <div class="texto">
+            <b>En esta aplicacion veras los distintos puntos de interes de Santurtzi acompañados de interesantes y
+              divertidas actividades</b>
 
+            <b>A contuacion te haremos te daremos unas pequeñas explicaciones de como se juega :)</b>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+        <ion-card-content>
+          <h1>Mapa</h1>
+          <img src="../../assets/img/inst_1.PNG">
+          <div class="texto">
+            <b>El juego es simple, como podeis ver en el mapa van a haber dos tipos de marcadores, el azul que en este caso sois vosotros y los rojos que son los puntos a los que teneis que ir, para interactuar con el marcador los circulos que salen tienen que tocarse entre si</b>
+            <b>Cuando esteis cerca dentro del punto saldra informacion y podreis darle a empezar la actividad</b>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+        <ion-card-content>
+          <h1>Informacion</h1>
+          <img src="../../assets/img/inst_2.png">
+          <div class="texto">
+            <b>Cuando entreis en la actividad primero os podra salir una breve explicacion junto con un audio o video, prestad mucha atencion a cada cosa que os sera util para los siguientes juegos!</b>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+        <ion-card-content>
+          <h1>Juegos</h1>
+          <img src="../../assets/img/inst_3.png">
+          <div class="texto">
+            <b>En esta aplicacion encontrareis distintos tipos de juegos, desde algunos simples como juntar texto a la imagen que corresponde u otros mas entretenidos como un puzzle, ¡Esperamos que os gusten los juegos!</b>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

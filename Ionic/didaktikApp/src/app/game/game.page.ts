@@ -3,7 +3,7 @@ import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 import { Router } from '@angular/router';
 import { GuneaService } from '../services/gunea.service';
 import { Gunea } from '../interfaces/gunea';
-import { ToastController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 
 
 declare var google;
@@ -79,12 +79,12 @@ export class GamePage implements OnInit {
   ];
   lati;
   long;
-  marker
-  distance
+  userMarker
+  circle
   locationWatchStarted: boolean;
   locationSubscription: any;
 
-  constructor(private geolocation: Geolocation, private route: Router, public toastController: ToastController/*private guneaService: GuneaService*/) { }
+  constructor(private geolocation: Geolocation, public route: Router, public toastController: ToastController, private menu: MenuController/*private guneaService: GuneaService*/) { }
 
   /* getMarkers(): void {
      this.guneaService.getGuneak(this.refresh)
@@ -95,6 +95,7 @@ export class GamePage implements OnInit {
 
   ngOnInit() {
     //this.getMarkers()
+    this.menu.enable(true)
     this.loadMap()
   }
 
@@ -186,7 +187,8 @@ export class GamePage implements OnInit {
         "<div id='mydiv' style='text-align:center'>" +
         "<h3>" + marker.title + "</h3>" +
         "<img src=" + marker.img + " height='100px' width='auto'/><br>" +
-        "<ion-icon id='boton' name='play-outline' style='font-size:20px'>" +
+
+        "<ion-icon id='btnurl' name='play-outline' style='font-size:20px'>" +
         "</div>"
 
       infowindow = new google.maps.InfoWindow({
@@ -198,7 +200,7 @@ export class GamePage implements OnInit {
         position: position,
       })
       google.maps.event.addListener(mapMarker, 'click', function () {
-        console.log(marker.url)
+
         id = this.id;
         infowindow.setContent(content);
         infowindow.open(this.map, mapMarker);
@@ -216,10 +218,10 @@ export class GamePage implements OnInit {
       });
     }
     google.maps.event.addListener(infowindow, 'domready', () => {
-      var button = document.getElementById('boton');
-      this.distance = this.getDistance(infowindow)
-      console.log('distance: ' + this.distance)
-      if (this.distance >= 0) {
+      var distance = this.getDistance(infowindow)
+      console.log("distance: " + distance)
+      var button = (document.getElementById('btnurl') as HTMLIonIconElement);
+      if (distance <= 100) {
         button.addEventListener('click', () => {
           this.route.navigate(['/' + this.getUrl(id)]);
         });
@@ -228,13 +230,12 @@ export class GamePage implements OnInit {
 
   }
   getDistance(infowindow) {
-    //console.log(this.marker.coords.latitude)
-    //console.log(this.marker.coords.longitude)
+
     var R = 6371000
-    var rlat1 = this.marker.position.lat() * (Math.PI / 180); // Convert degrees to radians
+    var rlat1 = this.userMarker.position.lat() * (Math.PI / 180); // Convert degrees to radians
     var rlat2 = infowindow.position.lat() * (Math.PI / 180); // Convert degrees to radians
     var difflat = rlat2 - rlat1; // Radian difference (latitudes)
-    var difflon = (infowindow.position.lng() - this.marker.position.lng()) * (Math.PI / 180);
+    var difflon = (infowindow.position.lng() - this.userMarker.position.lng()) * (Math.PI / 180);
     var d = 2 * R * Math.atan(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
     return d;
   }
@@ -251,7 +252,7 @@ export class GamePage implements OnInit {
   }
 
   locateUser(myLatLng) {
-    this.marker = new google.maps.Marker({
+    this.userMarker = new google.maps.Marker({
       icon: {
         path: google.maps.SymbolPath.CIRCLE,
         scale: 10,
@@ -261,9 +262,9 @@ export class GamePage implements OnInit {
         strokeColor: '#ffffff',
       }
     });
-    this.marker.setPosition(myLatLng)
+    this.userMarker.setPosition(myLatLng)
     console.log(this.lati)
-    var circle = new google.maps.Circle({
+    this.circle = new google.maps.Circle({
       center: myLatLng,
       radius: 50,
       fillColor: "#0000FF",
@@ -273,29 +274,27 @@ export class GamePage implements OnInit {
       strokeOpacity: 0.1,
       strokeWeight: 2
     });
-    this.marker.bindTo("position", circle, "center");
-    this.marker.setMap(this.map);
+    this.userMarker.bindTo("position", this.circle, "center");
+    this.userMarker.setMap(this.map);
   }
 
   updateMarker() {
-    let watch = this.geolocation.watchPosition();
-    let subscription = watch.subscribe(async (data: Geoposition) => {
-      console.log(data.coords.latitude)
-      console.log(data.coords.longitude)
-      this.lati = data.coords.latitude
-      this.long = data.coords.longitude
+    this.geolocation.getCurrentPosition({
+      timeout: 10000,
+      enableHighAccuracy: true
+    }).then((resp) => {
+      this.userMarker.setMap(null)
+      this.circle.setMap(null)
+      this.lati = resp.coords.latitude
+      this.long = resp.coords.longitude
       var myLatLng = new google.maps.LatLng(this.lati, this.long)
-      this.marker.setPosition(myLatLng)
-      this.marker.setMap(this.map)
+      this.locateUser(myLatLng)
       this.map.panTo(myLatLng)
-      console.log("marker")
-      console.log(this.lati)
-      console.log(this.marker.coords.longitude)
-      console.log('data', data)
-      subscription.unsubscribe()
+    }).catch((error) => {
+      console.log('Error getting location', error);
     });
 
-    
+
   }
 }
 

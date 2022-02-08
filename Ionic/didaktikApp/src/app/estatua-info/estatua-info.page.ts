@@ -21,10 +21,9 @@ export class EstatuaInfoPage implements OnInit {
   disable
   sound1 = new Howl({
     src: ['../assets/audio/Las_Sardineras.mp3'],
-    volume: 0.15,
+
     onplay: function () {
       (document.getElementById('replay') as HTMLInputElement).disabled = true;
-
     },
     onend: function () {
       (document.getElementById('replay') as HTMLInputElement).disabled = false;
@@ -33,7 +32,6 @@ export class EstatuaInfoPage implements OnInit {
   });
   sound2 = new Howl({
     src: ['../assets/audio/cancion_estatua.mp3'],
-    volume: 0.15,
     onplay: function () {
       (document.getElementById('replay') as HTMLInputElement).disabled = true;
       (document.getElementById('cancion') as HTMLInputElement).disabled = true;

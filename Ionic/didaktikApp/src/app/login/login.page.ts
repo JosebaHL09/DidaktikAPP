@@ -106,12 +106,10 @@ export class LoginPage {
   async shared() {
     await Share.share({
       title: 'Cuestionario Previo',
-      text: $("#value1").val() + "<br/>" + $("#value2").val() + "<br/>" + $("#value3").val() + " ",
-      url: 'https://www.uni.eus/es/',
+      text: "1-" + $("#value1").val() + "\n 2-" + $("#value2").val() + "\n 3-" + $("#value3").val() + " ",
       dialogTitle: 'Compartelo con tus amigos',
     });
   }
-
 
   async sig() {
     this.i = this.i + 1;

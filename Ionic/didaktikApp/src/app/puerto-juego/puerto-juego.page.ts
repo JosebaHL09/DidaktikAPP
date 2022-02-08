@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-puerto-juego',
@@ -13,7 +14,7 @@ export class PuertoJuegoPage implements OnInit {
 
   id
 
-  constructor(public alertController: AlertController, private route: Router) { }
+  constructor(public alertController: AlertController, private route: Router, private menu:MenuController) { }
 
   ngOnInit() {
 
@@ -40,6 +41,7 @@ export class PuertoJuegoPage implements OnInit {
           text: 'OK',
           role: 'bai',
           handler: () => {
+            this.menu.enable(true)
             this.goMap();
           }
         },

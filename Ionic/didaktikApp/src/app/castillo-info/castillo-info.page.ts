@@ -16,10 +16,9 @@ export class CastilloInfoPage implements OnInit {
   sound = new Howl({
     src: ['../assets/audio/Leyendas.mp3'],
     onplay:function () {
-      (document.getElementById('btn') as HTMLInputElement).disabled = true;
+
     },
     onend: function () {
-      (document.getElementById('btn') as HTMLInputElement).disabled = false;
       document.getElementById("overlay").classList.add('overlayshow');
     }
   });
@@ -72,6 +71,7 @@ export class CastilloInfoPage implements OnInit {
           text: 'SI',
           role: 'bai',
           handler: () => {
+            this.menu.enable(true)
             this.goMap();
           }
         },

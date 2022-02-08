@@ -21,8 +21,8 @@ export class AppComponent {
 
   };
   public appPages = [
-    { title: 'Inicio', url: '/home/', icon: 'home' },
-    { title: 'Instrucciones', url: '/instrucciones/', icon: 'information-circle' },
+    { title: 'Inicio', url: '/home', icon: 'home' },
+    { title: 'Instrucciones', url: '/instrucciones', icon: 'information-circle' },
     { title: 'Castillo', url: '/castillo-info', icon: 'heart' },
     { title: 'Mural', url: '/mural-info', icon: 'archive' },
     { title: 'Estatua', url: '/estatua-info', icon: 'trash' },
