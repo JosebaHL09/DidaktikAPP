@@ -1,0 +1,40 @@
+ion-content {
+    --background: url('../../assets/img/fondo1.jpg') 0 0/100% 100% no-repeat;
+}
+#imgs{
+    display: flex;
+    align-items:center;
+}
+#imgs img{
+    width: 50%;
+    height: auto;
+}
+h1{
+    text-align: center;
+    margin-bottom: 5%;
+}
+b{
+    text-align: left;
+}
+ion-card{
+    height: 87%;
+    margin-bottom: auto;
+}
+ion-slides{
+    height: 100%;
+}
+ion-slide{
+    margin-bottom: 20%;
+    height: auto;
+}
+ion-label{
+    margin-left: 5%;
+}
+.slide{
+    width: 100%;
+}
+h2{
+    text-align: center;
+    margin-bottom: 5%;
+    top:0
+}

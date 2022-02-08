@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>DidaktikApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <h1>Creditos</h1>
+      <b>Proyecto llevado a cabo por alumnos del centro Uni-Eibar en colaboracion con alumnos de magisterio de la UPV</b>
+      <div id="imgs">
+        <img src="../../assets/img/unilogo.png" alt="">
+        <img src="../../assets/img/upvlogo.png" alt="">
+      </div>
+      <ion-slides pager="true">
+        <ion-slide>
+          <div class="slide">
+            <h2>Desarrolladores</h2>
+            <div *ngFor="let user of us">
+              <ion-item>
+                <ion-avatar>
+                  <img src={{user.img}}>
+                </ion-avatar>
+                <ion-label>
+                  {{user.name}}
+                </ion-label>
+              </ion-item>
+            </div>
+          </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="slide">
+              <h2>Colaboradores</h2>
+              <div *ngFor="let user of upv">
+                <ion-item>
+                  <ion-avatar>
+                    <img src={{user.img}}>
+                  </ion-avatar>
+                  <ion-label>
+                    {{user.name}}
+                  </ion-label>
+                </ion-item>
+              </div>
+            </div>
+          </ion-slide>
+      </ion-slides>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

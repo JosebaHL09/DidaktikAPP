@@ -69,7 +69,11 @@ const routes: Routes = [
   {
     path: 'puerto-juego',
     loadChildren: () => import('./puerto-juego/puerto-juego.module').then( m => m.PuertoJuegoPageModule)
+  },  {
+    path: 'creditos',
+    loadChildren: () => import('./creditos/creditos.module').then( m => m.CreditosPageModule)
   }
+
 
 
 
