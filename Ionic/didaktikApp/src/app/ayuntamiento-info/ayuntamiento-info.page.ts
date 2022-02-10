@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-//import { DocumentViewer } from '@awesome-cordova-plugins/document-viewer/ngx';
 import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-ayuntamiento-info',
@@ -9,20 +8,14 @@ import { AlertController } from '@ionic/angular';
 })
 export class AyuntamientoInfoPage implements OnInit {
 
-  constructor(private route: Router,public alertController: AlertController /*private document: DocumentViewer*/) { }
-  
-   /*options: DocumentViewerOptions = {
-    title: 'Cuento'
-  }*/
+  constructor(private route: Router,public alertController: AlertController) { }
   ngOnInit() {
   }
   goMap(){
     this.route.navigate(['/game']);
 
   }
-  verLibro(){
-    //this.document.viewDocument('../assets/cuento.pdf', 'application/pdf', options)
-  }
+ 
   async salir() {
     const alert = await this.alertController.create({
       cssClass: 'successalert',
