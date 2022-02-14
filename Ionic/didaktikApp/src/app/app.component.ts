@@ -11,7 +11,7 @@ import { Platform } from '@ionic/angular';
 export class AppComponent {
 
   userName2: String;
-  platform
+  platform;
   constructor(private cachingService: CachingService, platform: Platform) {
     this.cachingService.initStorage();
     this.platform = platform
@@ -29,6 +29,7 @@ export class AppComponent {
     { title: 'Inicio', url: '/home', icon: 'home' },
     { title: 'Instrucciones', url: '/instrucciones', icon: 'information-circle' },
     { title: 'Creditos', url: '/creditos', icon: 'people' },
+    { title: 'Bai', url: '/mural-juego', icon: 'people' },
   
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];

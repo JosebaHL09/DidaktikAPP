@@ -72,6 +72,10 @@ const routes: Routes = [
   },  {
     path: 'creditos',
     loadChildren: () => import('./creditos/creditos.module').then( m => m.CreditosPageModule)
+  },
+  {
+    path: 'mural-juego',
+    loadChildren: () => import('./mural-juego/mural-juego.module').then( m => m.MuralJuegoPageModule)
   }
 
 

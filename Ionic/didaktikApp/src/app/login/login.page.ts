@@ -40,6 +40,10 @@ export class LoginPage {
   async setName(x: string) {
     await Storage.set({
       key: 'name',
+      value: '',
+    });
+    await Storage.set({
+      key: 'name',
       value: x,
     });
   };
@@ -69,12 +73,13 @@ export class LoginPage {
     let apodo = this.userNombre[0].toUpperCase() + this.userNombre.slice(1).toLowerCase();
     this.user.nombre = apodo;
     this.setName(apodo);
-    let navigationExtras: NavigationExtras = {
+    /*let navigationExtras: NavigationExtras = {
       state: {
         user: this.user
       }
-    }
-    this.router.navigateByUrl('menu', navigationExtras);
+    }*/
+    //this.router.navigateByUrl('menu', navigationExtras);
+    this.router.navigateByUrl('menu');
   }
 
   async presentLoading() {
