@@ -3,6 +3,8 @@ import * as $ from "jquery";
 import 'jqueryui';
 import 'jquery-ui-touch-punch';
 import { Router } from '@angular/router';
+import { MenuController} from '@ionic/angular';
+
 
 @Component({
   selector: 'app-mural-juego',
@@ -11,18 +13,12 @@ import { Router } from '@angular/router';
 })
 export class MuralJuegoPage implements OnInit {
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, private menu: MenuController) { }
 
 
 
   ngAfterViewInit() {
-    /*
-    $(document).ready(function(){
-    alert('JQuery is working!!');
-    });
-    */
-
-    $(".marronero").css("display","none")
+    $(".marronero").css("display", "none")
     var doneCheck = 0;
     var curZindex = 0;
     $(".pic")
@@ -78,9 +74,9 @@ export class MuralJuegoPage implements OnInit {
               if (doneCheck == 25) {
                 $(".pic").css("border", "none");
                 //alert("Good job!");
-                $(".marronero").css("display","block")
-                
-                
+                $(".marronero").css("display", "block")
+
+
               }
             }
           });
@@ -96,7 +92,7 @@ export class MuralJuegoPage implements OnInit {
     });
   }
 
-  goJuego(){
+  goJuego() {
     this.route.navigateByUrl('/mural-info', {
       replaceUrl: true
     });
@@ -105,7 +101,7 @@ export class MuralJuegoPage implements OnInit {
 
 
   ngOnInit() {
-
+    this.menu.enable(false);
   }
 
 }

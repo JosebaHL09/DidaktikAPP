@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-castillo-juego',
   templateUrl: './castillo-juego.page.html',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 export class CastilloJuegoPage implements OnInit {
   public aukeratutakoerantzuna1
   public aukeratutakoerantzuna2
-  constructor(public alertController: AlertController, private route: Router) { }
+  constructor(public alertController: AlertController, private route: Router, private menu: MenuController) { }
 
   hidden
   toggle1: boolean;
@@ -18,6 +19,7 @@ export class CastilloJuegoPage implements OnInit {
   toggle4: boolean;
 
   ngOnInit() {
+    this.menu.enable(false)
     this.hidden = false
     this.toggle1 = false
     this.toggle2 = false
@@ -57,6 +59,7 @@ export class CastilloJuegoPage implements OnInit {
         this.incorrect()
       }
     } else {
+      this.menu.enable(true)
       this.goMap()
     }
 

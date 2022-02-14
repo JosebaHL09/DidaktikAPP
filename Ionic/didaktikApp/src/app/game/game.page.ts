@@ -33,7 +33,7 @@ export class GamePage implements OnInit {
       lati: 43.332622,
       long: -3.040442,
       title: 'Mural Eskorbuto',
-      url: '/mural-info',
+      url: '/mural-juego',
       img: '../../assets/img/mural.jpg'
     },
     {
