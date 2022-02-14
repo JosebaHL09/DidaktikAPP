@@ -5,7 +5,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-button class="marronero" color='success' (click)="goJuego()">Siguiente</ion-button>
   <div class="puzzle-wrapper">
     <div class="container">
       <div class="pic pic-1-1">
@@ -162,4 +161,9 @@
       </div>
     </div>
   </div>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="light" id="btng" (click)="showMarker()">
+      <ion-icon md="play" ios="play"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

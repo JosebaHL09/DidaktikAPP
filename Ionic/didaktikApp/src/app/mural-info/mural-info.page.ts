@@ -82,6 +82,7 @@ export class MuralInfoPage implements OnInit {
           role: 'bai',
           handler: () => {
             this.showInfo();
+            this.stopAudio();
           }
         },
         {

@@ -3,7 +3,8 @@ import * as $ from "jquery";
 import 'jqueryui';
 import 'jquery-ui-touch-punch';
 import { Router } from '@angular/router';
-import { MenuController} from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -13,12 +14,12 @@ import { MenuController} from '@ionic/angular';
 })
 export class MuralJuegoPage implements OnInit {
 
-  constructor(private route: Router, private menu: MenuController) { }
+  constructor(private route: Router, private menu: MenuController, public alertController: AlertController) { }
 
 
 
   ngAfterViewInit() {
-    $(".marronero").css("display", "none")
+
     var doneCheck = 0;
     var curZindex = 0;
     $(".pic")
@@ -92,16 +93,37 @@ export class MuralJuegoPage implements OnInit {
     });
   }
 
-  goJuego() {
+  goInfo() {
     this.route.navigateByUrl('/mural-info', {
       replaceUrl: true
     });
   }
 
-
-
   ngOnInit() {
     this.menu.enable(false);
   }
+  async showMarker() {
+    const alert = await this.alertController.create({
+      cssClass: 'successalert',
+      header: 'Aviso',
+      message: "<img id='alerta'src='../../assets/img/alerta.png'>¿Seguro que quieres salir?",
+      buttons: [
+        {
+          text: 'SI',
+          role: 'bai',
+          handler: () => {
+            this.goInfo();
+          }
+        },
+        {
+          text: 'NO',
+          role: 'bai',
+          handler: () => {
 
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 }
