@@ -88,7 +88,7 @@ export class GamePage implements OnInit {
 
   /* getMarkers(): void {
      this.guneaService.getGuneak(this.refresh)
-       .subscribe(data => { this.markers = data; this.loadMap1(); },
+       .subscribe(data => { this.markers = data; this.loadMap(); },
          error => console.log('Error::' + error));
    }*/
 

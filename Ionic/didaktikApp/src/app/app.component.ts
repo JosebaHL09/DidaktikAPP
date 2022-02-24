@@ -28,9 +28,7 @@ export class AppComponent {
   public appPages = [
     { title: 'Inicio', url: '/home', icon: 'home' },
     { title: 'Instrucciones', url: '/instrucciones', icon: 'information-circle' },
-    { title: 'Creditos', url: '/creditos', icon: 'people' },
-    { title: 'Bai', url: '/mural-juego', icon: 'people' },
-  
+    { title: 'Creditos', url: '/creditos', icon: 'people' }, 
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
